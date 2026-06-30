@@ -1,0 +1,11 @@
+.DS_Store
+*.swp
+.idea/
+.vscode/
+node_modules/
+
+# Large source PNGs kept on disk as masters; web build uses optimized JPGs
+images/photos/generated/*.png
+NO/
+Brand_Book_Master_Text.docx
+set_platform_pre-icon-fix-backup.png

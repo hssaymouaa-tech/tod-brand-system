@@ -1,0 +1,2120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TOD by beIN — Book 03 · Voice & Language</title>
+<meta name="description" content="The locked operating brand system for TOD by beIN — No. 1 Sports & Stories. Ten modules. Five appendices." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800;900&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* PRIMARY */
+    --tod-yellow: #FFC72C;
+    --tod-yellow-dim: #E6B227;
+    --tod-navy: #010E21;
+    --tod-deep-navy: #020B16;
+    --tod-off-white: #F4F6FA;
+    --tod-mid-grey: #6B7280;
+    --tod-light-grey: #DAE3EC;
+
+    /* EXPRESSION ACCENTS */
+    --tod-deep-purple: #2E0279;
+    --tod-light-purple: #7D37DE;
+
+    /* UI SEMANTIC */
+    --ui-success: #22C55E;
+    --ui-error: #EF4444;
+    --ui-live: #FF3B30;
+
+    /* HAPPY PALETTE */
+    --hp-violet: #A346C9;
+    --hp-magenta: #E0298C;
+    --hp-coral: #FF6B5C;
+    --happy-grad: linear-gradient(135deg, #A346C9 0%, #E0298C 38%, #FF6B5C 68%, #FFC72C 100%);
+    --happy-grad-stripes:
+      repeating-linear-gradient(45deg, rgba(0,0,0,.12) 0 2px, transparent 2px 6px),
+      linear-gradient(135deg, #A346C9 0%, #E0298C 38%, #FF6B5C 68%, #FFC72C 100%);
+
+    /* PHOTO PATH (relative from HTML_Brand_Book/index.html) */
+    --bar-h: 64px;
+    --pad-x: clamp(24px, 6vw, 112px);
+    --pad-y: clamp(64px, 10vw, 160px);
+    --max-w: 1320px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Alexandria', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--tod-navy);
+    background: var(--tod-off-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: var(--bar-h);
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+
+  /* ===================== LOGO ===================== */
+  .tod-logo {
+    display: inline-block;
+    width: var(--logo-w, 120px);
+    aspect-ratio: 778 / 477;
+    color: currentColor;
+  }
+  .tod-logo svg { width: 100%; height: 100%; }
+  /* Wide horizontal mono lockup (variant 05) */
+  .tod-logo.wide { aspect-ratio: 2 / 1; }
+
+  /* ===================== TOP BAR ===================== */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--bar-h);
+    z-index: 100;
+    background: rgba(1, 14, 33, 0.86);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    display: flex; align-items: center;
+    padding: 0 24px;
+    color: var(--tod-off-white);
+  }
+  .topbar .burger {
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,.06);
+    border-radius: 10px; border: 1px solid rgba(255,255,255,.08);
+    cursor: pointer; transition: all .2s var(--ease);
+    margin-right: 14px;
+  }
+  .topbar .burger:hover { background: rgba(255,199,44,.16); border-color: var(--tod-yellow); }
+  .topbar .burger svg { width: 18px; height: 18px; color: var(--tod-off-white); }
+  .topbar .topbar-logo { color: var(--tod-off-white); }
+  .topbar .topbar-logo .tod-logo { --logo-w: 80px; }
+  .topbar .topbar-title {
+    margin-left: 18px; padding-left: 18px;
+    border-left: 1px solid rgba(255,255,255,.1);
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(244,246,250,.6);
+  }
+  .topbar .topbar-title strong { color: var(--tod-yellow); font-weight: 500; }
+  .topbar .topbar-right {
+    margin-left: auto; display: flex; align-items: center; gap: 14px;
+    font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(244,246,250,.5);
+  }
+  .topbar .topbar-right .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ui-success); box-shadow: 0 0 8px rgba(34,197,94,.6); }
+  @media (max-width: 720px) { .topbar .topbar-title, .topbar .topbar-right { display: none; } }
+
+  /* ===================== DRAWER ===================== */
+  .drawer-backdrop {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(1,14,33,.5);
+    backdrop-filter: blur(8px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s var(--ease);
+  }
+  .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed; top: 0; left: 0; height: 100vh; width: min(360px, 90vw);
+    z-index: 300;
+    background: var(--tod-navy);
+    color: var(--tod-off-white);
+    padding: 28px 24px;
+    transform: translateX(-105%);
+    transition: transform .35s var(--ease);
+    overflow-y: auto;
+    box-shadow: 30px 0 60px -20px rgba(0,0,0,.5);
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer::-webkit-scrollbar { width: 6px; }
+  .drawer::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 3px; }
+
+  .drawer .drawer-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,.06); margin-bottom: 24px; }
+  .drawer .drawer-head .tod-logo { --logo-w: 110px; color: var(--tod-off-white); }
+  .drawer .close-x {
+    width: 36px; height: 36px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.1); background: transparent; color: var(--tod-off-white);
+    display: grid; place-items: center; cursor: pointer; transition: all .2s var(--ease);
+  }
+  .drawer .close-x:hover { background: rgba(255,199,44,.16); border-color: var(--tod-yellow); }
+
+  .drawer .nav-section {
+    margin: 18px 0 8px;
+    font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--tod-yellow); opacity: .8;
+  }
+  .drawer .nav-item {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 10px 4px; font-size: 14px; color: rgba(244,246,250,.78);
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    transition: color .2s var(--ease), padding-left .2s var(--ease), background .2s var(--ease);
+    border-radius: 6px;
+  }
+  .drawer .nav-item:hover { color: var(--tod-off-white); padding-left: 10px; background: rgba(255,255,255,.03); }
+  .drawer .nav-item.active { color: var(--tod-yellow); }
+  .drawer .nav-item .num { font-size: 11px; opacity: .5; font-variant-numeric: tabular-nums; min-width: 22px; letter-spacing: .05em; }
+  .drawer .nav-meta {
+    margin-top: 36px; padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,.06);
+    font-size: 11px; color: rgba(244,246,250,.4); line-height: 1.7;
+  }
+  .drawer .nav-meta strong { color: var(--tod-yellow); font-weight: 600; }
+  .drawer .sig-line {
+    margin-top: 24px; padding: 14px 16px;
+    border-left: 3px solid var(--tod-yellow);
+    background: rgba(255,199,44,.05);
+    border-radius: 4px;
+  }
+  .drawer .sig-line .label { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--tod-yellow); }
+  .drawer .sig-line .line { font-size: 15px; font-weight: 700; margin-top: 4px; }
+
+  /* ===================== SECTIONS ===================== */
+  section {
+    padding: var(--pad-y) var(--pad-x);
+    position: relative; scroll-margin-top: calc(var(--bar-h) + 8px);
+  }
+  .light    { background: var(--tod-off-white); color: var(--tod-navy); }
+  .dark     { background: var(--tod-navy); color: var(--tod-off-white); }
+  .deep     { background: var(--tod-deep-navy); color: var(--tod-off-white); }
+  .yellow   { background: var(--tod-yellow); color: var(--tod-navy); }
+  .spectrum { background: var(--happy-grad-stripes); color: #fff; }
+
+  .inner { max-width: var(--max-w); margin: 0 auto; }
+
+  .chap-meta {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--tod-yellow);
+    margin-bottom: 28px;
+  }
+  .chap-meta .line { flex: 0 0 36px; height: 1px; background: currentColor; }
+  .light .chap-meta { color: var(--tod-deep-purple); }
+  .yellow .chap-meta { color: var(--tod-navy); }
+
+  /* ===================== TYPOGRAPHY ===================== */
+  h1, h2, h3, h4 { font-family: 'Alexandria', sans-serif; font-weight: 800; line-height: 1.02; letter-spacing: -.025em; margin: 0; }
+  h1 { font-size: clamp(56px, 9vw, 144px); font-weight: 900; }
+  h2 { font-size: clamp(40px, 6.4vw, 96px); font-weight: 800; }
+  h3 { font-size: clamp(22px, 2.6vw, 36px); font-weight: 700; letter-spacing: -.015em; }
+  h4 { font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+
+  p { font-size: clamp(14.5px, 1vw, 16.5px); line-height: 1.65; opacity: .82; max-width: 64ch; }
+  .lead { font-size: clamp(19px, 1.6vw, 26px); line-height: 1.4; font-weight: 400; opacity: 1; max-width: 30ch; }
+  .accent { color: var(--tod-yellow); }
+  .accent-purple { color: var(--tod-deep-purple); }
+
+  /* ===================== PILL ===================== */
+  .pill {
+    display: inline-flex; align-items: center; padding: 7px 14px;
+    border-radius: 999px; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    background: rgba(255,255,255,.08); color: inherit;
+    border: 1px solid rgba(255,255,255,.12);
+    font-weight: 500;
+  }
+  .light .pill { background: rgba(1,14,33,.04); border-color: rgba(1,14,33,.08); }
+  .pill.yellow-pill { background: rgba(255,199,44,.15); border-color: rgba(255,199,44,.35); color: var(--tod-yellow); }
+  .pill.live { background: rgba(255,59,48,.15); border-color: rgba(255,59,48,.4); color: var(--ui-live); }
+  .pill.locked { background: rgba(34,197,94,.12); border-color: rgba(34,197,94,.32); color: var(--ui-success); }
+  .pill.flag { background: rgba(239,68,68,.12); border-color: rgba(239,68,68,.32); color: var(--ui-error); }
+
+  /* ===================== BUTTONS ===================== */
+  .btn-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 14px 24px; border-radius: 999px;
+    background: var(--tod-yellow); color: var(--tod-navy);
+    font-weight: 600; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(255,199,44,.5); }
+
+  /* ===================== GRIDS ===================== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* ===================== TABLE ===================== */
+  .data-table {
+    width: 100%; border-collapse: collapse; margin-top: 32px;
+    font-size: 14px;
+  }
+  .data-table th, .data-table td {
+    text-align: left; padding: 16px 18px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    vertical-align: top;
+  }
+  .light .data-table th, .light .data-table td { border-color: rgba(1,14,33,.08); }
+  .data-table th { font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; opacity: .56; }
+  .data-table td strong { color: var(--tod-yellow); font-weight: 600; }
+  .light .data-table td strong { color: var(--tod-deep-purple); }
+
+  /* ===================== COVER ===================== */
+  .cover {
+    min-height: calc(100vh - var(--bar-h));
+    display: grid; grid-template-rows: 1fr auto;
+    padding: 48px var(--pad-x) var(--pad-y);
+    color: var(--tod-off-white);
+    position: relative; overflow: hidden;
+    background: var(--tod-navy);
+  }
+  .cover .bg-photo {
+    position: absolute; inset: 0;
+    background-image: url("./images/photos/architectural/TOD_WhiteClay_01_Football.jpg");
+    background-size: cover; background-position: center;
+    opacity: .14; z-index: 0;
+    filter: contrast(0.95);
+  }
+  .cover .bg-grad {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      radial-gradient(900px 600px at 78% 22%, rgba(255,199,44,.16), transparent 65%),
+      radial-gradient(1200px 800px at 18% 92%, rgba(131,58,180,.4), transparent 70%),
+      linear-gradient(180deg, rgba(1,14,33,.4) 0%, rgba(1,14,33,.95) 100%);
+  }
+  .cover > * { position: relative; z-index: 2; }
+  .cover .pad { align-self: center; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .cover .cover-logo {
+    width: min(640px, 70vw);
+    color: var(--tod-off-white);
+    margin: 32px auto 12px;
+  }
+  .cover .cover-logo .tod-logo { --logo-w: 100%; width: 100%; }
+  .cover .sub { margin-top: 32px; font-size: 17px; color: rgba(244,246,250,.65); max-width: 56ch; line-height: 1.6; text-align: center; }
+  .cover .signature {
+    margin-top: 40px; padding: 24px 36px;
+    border-left: 3px solid var(--tod-yellow);
+    background: rgba(255,255,255,.04); border-radius: 4px;
+    display: inline-block; text-align: left;
+  }
+  .cover .signature .label { font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--tod-yellow); }
+  .cover .signature .line { font-size: clamp(28px, 3.4vw, 44px); font-weight: 800; letter-spacing: -.015em; margin-top: 8px; }
+  .cover .meta {
+    display: flex; gap: 28px; align-items: end; justify-content: center; flex-wrap: wrap;
+    margin-top: 56px;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(244,246,250,.5);
+    text-align: center;
+  }
+  .cover .meta-tags { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .cover .meta-tags span { display: flex; gap: 10px; align-items: center; }
+  .cover .meta-tags span::before { content: ''; width: 6px; height: 6px; background: var(--tod-yellow); border-radius: 50%; }
+
+  /* ===================== PDF-STYLE CHAPTER DIVIDER ===================== */
+  .chapter-divider {
+    position: relative; min-height: 80vh;
+    display: grid; align-content: end;
+    padding: var(--pad-y) var(--pad-x) calc(var(--pad-y) * .7);
+    color: var(--tod-off-white);
+    overflow: hidden;
+    background: var(--tod-navy);
+  }
+  .chapter-divider .bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    z-index: 0;
+  }
+  .chapter-divider .bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(1,14,33,.25) 0%, rgba(1,14,33,.92) 100%);
+  }
+  .chapter-divider .content-block { position: relative; z-index: 1; max-width: var(--max-w); margin: 0 auto; width: 100%; }
+  .chapter-divider .module-label {
+    font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--tod-yellow); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .chapter-divider .module-label::before {
+    content: ''; width: 40px; height: 1px; background: var(--tod-yellow);
+  }
+  .chapter-divider h2 {
+    font-size: clamp(64px, 12vw, 180px); font-weight: 900;
+    line-height: .94; letter-spacing: -.035em;
+    color: var(--tod-off-white);
+    max-width: 14ch;
+  }
+  .chapter-divider .tag-list {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 36px;
+  }
+  .chapter-divider .ch-badge {
+    position: absolute; bottom: var(--pad-y); right: var(--pad-x);
+    z-index: 1;
+    padding: 14px 22px; border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    backdrop-filter: blur(12px);
+    font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--tod-off-white);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .chapter-divider .ch-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--tod-yellow); }
+
+  /* ===================== TOC ===================== */
+  .toc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 56px; }
+  @media (max-width: 760px) { .toc-grid { grid-template-columns: 1fr; } }
+  .toc-row {
+    display: grid; grid-template-columns: 56px 1fr auto; align-items: baseline; gap: 22px;
+    padding: 22px 0; border-bottom: 1px solid rgba(1,14,33,.08);
+    transition: padding-left .25s var(--ease);
+  }
+  .toc-row:hover { padding-left: 10px; }
+  .toc-row .n { font-variant-numeric: tabular-nums; font-size: 13px; color: var(--tod-mid-grey); letter-spacing: .04em; }
+  .toc-row .t { font-size: 20px; font-weight: 600; letter-spacing: -.005em; }
+  .toc-row .t small { display: block; font-size: 11.5px; font-weight: 400; color: var(--tod-mid-grey); letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
+  .toc-row .arr { color: var(--tod-mid-grey); transition: transform .25s var(--ease), color .25s var(--ease); font-size: 16px; }
+  .toc-row:hover .arr { color: var(--tod-deep-purple); transform: translateX(6px); }
+
+  /* ===================== CARD ===================== */
+  .card {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px; padding: 26px;
+    transition: transform .3s var(--ease), border-color .3s var(--ease);
+  }
+  .light .card { background: #fff; border-color: rgba(1,14,33,.06); }
+  .card:hover { transform: translateY(-3px); border-color: rgba(255,199,44,.4); }
+  .card h4 { color: var(--tod-yellow); margin-bottom: 12px; }
+  .light .card h4 { color: var(--tod-deep-purple); }
+  .card p { font-size: 14px; opacity: .76; }
+  .card .number { font-size: 11px; color: var(--tod-yellow); letter-spacing: .14em; font-variant-numeric: tabular-nums; margin-bottom: 8px; display: block; }
+  .light .card .number { color: var(--tod-deep-purple); }
+
+  /* ===================== SWATCH ===================== */
+  .swatch {
+    border-radius: 16px; overflow: hidden;
+    display: flex; flex-direction: column; min-height: 240px; position: relative;
+  }
+  .swatch .head { display: flex; justify-content: space-between; align-items: flex-start; padding: 22px 22px 14px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+  .swatch .head .name { font-weight: 700; font-size: 12.5px; }
+  .swatch .head .hex { opacity: .72; font-variant-numeric: tabular-nums; }
+  .swatch .body { flex: 1; padding: 22px; font-size: 12px; line-height: 1.55; }
+  .swatch .body strong { font-weight: 700; font-size: 13px; display: block; margin-bottom: 6px; letter-spacing: .04em; text-transform: uppercase; }
+  .swatch .tints { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .swatch .tints span { padding: 12px 10px; font-size: 10px; font-variant-numeric: tabular-nums; }
+
+  /* TYPE SPECIMEN */
+  .specimen { background: #fff; border-radius: 18px; padding: 48px; border: 1px solid rgba(1,14,33,.06); color: var(--tod-navy); }
+  .specimen .glyph { font-size: clamp(120px, 18vw, 220px); font-weight: 800; letter-spacing: -.04em; line-height: .9; color: var(--tod-deep-purple); }
+  .weight-row { display: grid; grid-template-columns: 130px 1fr; align-items: baseline; gap: 24px; padding: 14px 0; border-bottom: 1px solid rgba(1,14,33,.06); }
+  .weight-row .lbl { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--tod-mid-grey); }
+  .weight-row .smp { font-size: 22px; letter-spacing: -.01em; color: var(--tod-navy); }
+
+  /* ===================== GALLERY ===================== */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .gallery { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .gallery { grid-template-columns: 1fr; } }
+  .photo-tile {
+    aspect-ratio: 4 / 3;
+    border-radius: 14px; overflow: hidden;
+    background: var(--tod-deep-navy);
+    display: flex; align-items: flex-end; padding: 22px;
+    color: var(--tod-off-white); position: relative;
+    border: 1px solid rgba(255,255,255,.06);
+    transition: transform .3s var(--ease);
+    background-size: cover; background-position: center;
+  }
+  .photo-tile:hover { transform: translateY(-3px); }
+  .photo-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.75) 100%); pointer-events: none; }
+  .photo-tile .label { position: relative; z-index: 2; font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+  .photo-tile .label small { display: block; font-weight: 400; font-size: 10.5px; opacity: .7; margin-top: 4px; letter-spacing: .14em; text-transform: uppercase; }
+
+  /* ===================== ASSET STRIP ===================== */
+  .asset-strip {
+    margin-top: 48px; padding: 24px 28px;
+    border-radius: 16px; border: 1px solid rgba(255,255,255,.1);
+    display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+    background: rgba(255,255,255,.03);
+  }
+  .light .asset-strip { background: #fff; border-color: rgba(1,14,33,.08); }
+  .asset-strip .left { display: flex; gap: 16px; align-items: center; }
+  .asset-strip .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--tod-yellow); display: grid; place-items: center; color: var(--tod-navy); flex-shrink: 0; }
+  .asset-strip .ttl { font-size: 14px; font-weight: 600; }
+  .asset-strip .sub { font-size: 12px; opacity: .6; margin-top: 2px; }
+
+  /* ===================== SHIP ===================== */
+  .ship-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+  @media (max-width: 900px) { .ship-grid { grid-template-columns: 1fr 1fr; } }
+  .ship-card { padding: 32px 24px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); position: relative; overflow: hidden; }
+  .ship-card .letter { font-size: 96px; font-weight: 900; line-height: 1; color: var(--tod-yellow); letter-spacing: -.04em; margin-bottom: 16px; }
+  .ship-card h4 { color: var(--tod-off-white); font-size: 16px; letter-spacing: 0; text-transform: none; margin-bottom: 8px; font-weight: 700; }
+  .ship-card p { font-size: 14px; opacity: .72; }
+
+  /* ===================== ORBITAL DIAGRAMS ===================== */
+  .orbital {
+    position: relative;
+    background: var(--tod-navy);
+    border-radius: 22px;
+    overflow: hidden;
+    min-height: 620px;
+    margin-top: 48px;
+    isolation: isolate;
+  }
+  .orbital::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 55%, rgba(124, 58, 237, 0.42) 0%, rgba(46,2,121,0.18) 40%, transparent 70%),
+      radial-gradient(circle at 30% 30%, rgba(255,199,44,0.08) 0%, transparent 50%);
+  }
+  .orbital .orbit {
+    position: absolute;
+    left: 50%; top: 55%;
+    border-radius: 50%;
+    border: 1px solid rgba(255,199,44,0.14);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .orbital.pace .orbit-1 { width: 28%; aspect-ratio: 2.2 / 1; }
+  .orbital.pace .orbit-2 { width: 48%; aspect-ratio: 2.2 / 1; }
+  .orbital.pace .orbit-3 { width: 68%; aspect-ratio: 2.2 / 1; }
+  .orbital.pace .orbit-4 { width: 90%; aspect-ratio: 2.2 / 1; }
+
+  .orbital.ship .orbit { top: 50%; }
+  .orbital.ship .orbit-1 { width: 38%; aspect-ratio: 1 / 1; }
+  .orbital.ship .orbit-2 { width: 58%; aspect-ratio: 1 / 1; }
+  .orbital.ship .orbit-3 { width: 80%; aspect-ratio: 1 / 1; }
+
+  .orbital .center {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 4;
+  }
+  .orbital.pace .center { top: 56%; }
+  .orbital .center .big {
+    font-size: clamp(56px, 9vw, 128px);
+    color: var(--tod-off-white);
+    font-weight: 900;
+    letter-spacing: -.04em;
+    line-height: 1;
+  }
+  .orbital .center .pill-goal {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 22px;
+    margin-top: 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.2);
+    color: var(--tod-yellow);
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 600;
+  }
+
+  /* SHIP sphere */
+  .orbital.ship .sphere {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(220px, 32%, 320px); aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 45% 30%, rgba(255,255,255,0.25), rgba(124,58,237,0.95) 38%, rgba(46,2,121,1) 70%),
+      radial-gradient(ellipse at 60% 95%, rgba(255,140,40,0.65), transparent 55%);
+    box-shadow:
+      0 0 80px rgba(124,58,237,0.55),
+      0 0 160px rgba(46,2,121,0.6),
+      inset 0 -50px 60px rgba(255,140,40,0.32);
+    z-index: 2;
+  }
+  .orbital.ship .center { z-index: 4; }
+
+  /* Orbit nodes (label pills) */
+  .orbital .node {
+    position: absolute; z-index: 5;
+    display: flex; align-items: center; gap: 14px;
+    max-width: 28%;
+  }
+  .orbital .node .o-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 9px 18px 9px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(8px);
+    color: var(--tod-off-white);
+    font-size: 13.5px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .orbital .node .o-pill .letter {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    color: var(--tod-off-white);
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0;
+  }
+  .orbital .node .o-pill .label { color: var(--tod-yellow); }
+  .orbital .node.anchor .o-pill {
+    background: var(--tod-yellow); color: var(--tod-navy);
+    border-color: var(--tod-yellow);
+  }
+  .orbital .node.anchor .o-pill .letter { background: var(--tod-navy); color: var(--tod-yellow); }
+  .orbital .node.anchor .o-pill .label { color: var(--tod-navy); }
+  .orbital .node .desc {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.45;
+    max-width: 18ch;
+  }
+  .orbital .node .desc.left { text-align: right; }
+
+  /* Decorative dots on the orbits */
+  .orbital .dot {
+    position: absolute; z-index: 3;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--tod-yellow);
+    box-shadow: 0 0 12px rgba(255,199,44,0.5);
+  }
+  .orbital .dot.small { width: 6px; height: 6px; background: rgba(255,255,255,0.6); box-shadow: none; }
+
+  @media (max-width: 900px) {
+    .orbital { min-height: 540px; }
+    .orbital .node { max-width: 44%; }
+    .orbital .node .desc { font-size: 11px; max-width: 14ch; }
+    .orbital .node .o-pill { font-size: 11.5px; padding: 7px 14px 7px 7px; }
+    .orbital .node .o-pill .letter { width: 22px; height: 22px; font-size: 11px; }
+  }
+
+  /* ===================== IDENTITY DIVIDER (PDF chapter style) ===================== */
+  .identity-divider {
+    background: var(--tod-navy);
+    color: var(--tod-off-white);
+    padding: 56px var(--pad-x) 64px;
+    position: relative;
+    overflow: hidden;
+    min-height: 95vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    isolation: isolate;
+  }
+  .identity-divider::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background:
+      repeating-linear-gradient(58deg, transparent 0 78px, rgba(255,255,255,.025) 78px 79px),
+      radial-gradient(ellipse 80% 50% at 70% 90%, rgba(244,246,250,0.18) 0%, transparent 70%),
+      linear-gradient(180deg, #02112a 0%, #010818 100%);
+  }
+  .identity-divider > * { position: relative; z-index: 1; }
+
+  .ident-topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; letter-spacing: .18em;
+    color: rgba(244,246,250,.55);
+  }
+  .ident-topbar .center { color: var(--tod-off-white); font-weight: 600; }
+  .ident-topbar .center .sep { opacity: .35; margin: 0 10px; }
+
+  .ident-grid {
+    display: grid; grid-template-columns: 240px 1fr;
+    align-items: center; gap: 60px;
+    margin-top: 32px;
+  }
+  @media (max-width: 900px) {
+    .ident-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .ident-rail { display: flex; flex-direction: column; }
+  .ident-rail .ident-chapter {
+    display: block; padding: 14px 0; font-size: 20px;
+    font-weight: 500; letter-spacing: -.005em;
+    color: rgba(244,246,250,.22);
+    transition: color .25s var(--ease);
+  }
+  .ident-rail .ident-chapter:hover { color: rgba(244,246,250,.45); }
+  .ident-rail .ident-chapter.active {
+    color: var(--tod-off-white); opacity: 1;
+    padding-bottom: 18px;
+    border-bottom: 3px solid var(--tod-yellow);
+    width: max-content;
+  }
+
+  .ident-title-wrap { position: relative; }
+  .ident-title {
+    font-family: 'Alexandria', sans-serif;
+    font-size: clamp(72px, 13vw, 200px);
+    font-weight: 900;
+    line-height: .92;
+    letter-spacing: -.04em;
+    color: var(--tod-off-white);
+    margin: 0;
+  }
+  .ident-chapter-cursor {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-top: 24px; padding: 12px 22px;
+    border-radius: 999px;
+    background: rgba(244,246,250,.06);
+    border: 1px solid rgba(244,246,250,.1);
+    backdrop-filter: blur(8px);
+    color: var(--tod-off-white);
+    font-size: 11px; letter-spacing: .26em; text-transform: uppercase; font-weight: 600;
+  }
+  .ident-chapter-cursor .arrow {
+    width: 14px; height: 14px;
+    color: var(--tod-yellow);
+  }
+
+  .ident-pills {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: auto; padding-top: 48px;
+  }
+  .ident-pill {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(244,246,250,.04);
+    border: 1px solid rgba(244,246,250,.08);
+    color: rgba(244,246,250,.55);
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    text-decoration: none;
+    transition: color .25s var(--ease), border-color .25s var(--ease);
+  }
+  .ident-pill:hover, .ident-pill.active {
+    color: var(--tod-yellow);
+    border-color: rgba(255,199,44,.5);
+  }
+  .ident-pill .n { color: var(--tod-yellow); margin-right: 6px; opacity: .9; }
+
+  /* Identity subsections — compact padding so consecutive editorials sit closer together */
+  .identity-section { padding-top: 56px !important; padding-bottom: 56px !important; }
+  .identity-section .editorial { padding: 56px 48px; }
+  @media (max-width: 900px) { .identity-section .editorial { padding: 32px 24px; } }
+
+  /* Editorial — stretch columns so left rail doesn't leave empty bottom space */
+  .editorial { align-items: stretch !important; }
+  .editorial .ed-left { display: flex; flex-direction: column; }
+  .editorial .ed-left .ed-body:last-child { margin-bottom: 0; }
+  .editorial .ed-left .ed-spacer { flex: 1; min-height: 0; }
+  .editorial .ed-left .ed-footnote {
+    margin-top: auto; padding-top: 24px;
+    border-top: 1px solid rgba(1,14,33,.08);
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tod-mid-grey);
+  }
+
+  /* Tight logo diagram (grid sized to the logo + 10px bleed) */
+  .logo-tight {
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+    background:
+      linear-gradient(rgba(255, 102, 196, 0.28) 1px, transparent 1px) 0 0 / 100% 14.285%,
+      linear-gradient(90deg, rgba(255, 102, 196, 0.28) 1px, transparent 1px) 0 0 / 14.285% 100%,
+      #ffffff;
+    background-clip: padding-box;
+    border: 1px dashed rgba(255, 102, 196, 0.7);
+  }
+  .logo-tight > img,
+  .logo-tight > .tod-logo { display: block; }
+  .logo-tight .x-mark {
+    position: absolute; font-size: 11px;
+    color: var(--tod-mid-grey); font-weight: 500;
+    letter-spacing: .04em;
+  }
+  .logo-tight .x-mark.tl { top: -22px; left: -2px; }
+  .logo-tight .x-mark.tr { top: -22px; right: -2px; }
+  .logo-tight .x-mark.bl { bottom: -22px; left: -2px; }
+  .logo-tight .x-mark.br { bottom: -22px; right: -2px; }
+  .logo-tight .x-mark.t  { top: -22px; left: 50%; transform: translateX(-50%); }
+  .logo-tight .x-mark.bm { bottom: -22px; left: 50%; transform: translateX(-50%); }
+  .logo-tight .x-mark.l  { left: -22px; top: 50%; transform: translateY(-50%); }
+  .logo-tight .x-mark.r  { right: -22px; top: 50%; transform: translateY(-50%); }
+  .tight-wrap {
+    display: grid; place-items: center;
+    padding: 56px 32px;
+    background:
+      radial-gradient(ellipse 70% 90% at 50% 100%, rgba(46,2,121,0.04) 0%, transparent 70%),
+      linear-gradient(180deg, #fff 0%, var(--tod-off-white) 100%);
+    border-radius: 18px;
+    border: 1px solid rgba(1,14,33,.08);
+    min-height: 360px;
+    position: relative; overflow: hidden;
+  }
+  .tight-wrap::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(60deg, transparent 0 80px, rgba(1,14,33,.012) 80px 81px);
+    pointer-events: none;
+  }
+
+  /* Clear-space variant — outer dashed box + inner solid logo box, 10px bleed each */
+  .logo-clearspace {
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+    border: 1.5px dashed rgba(1,14,33,0.22);
+    background-image: repeating-linear-gradient(45deg, rgba(1,14,33,0.025) 0 8px, transparent 8px 16px);
+  }
+  .logo-clearspace .inner {
+    padding: 10px;
+    background: #fff;
+    border: 1px solid rgba(1,14,33,0.1);
+    position: relative;
+  }
+  .logo-clearspace .inner > img,
+  .logo-clearspace .inner > .tod-logo { display: block; }
+  .logo-clearspace .x-mark {
+    position: absolute; font-size: 11px; font-weight: 500;
+    color: var(--tod-mid-grey); letter-spacing: .04em;
+  }
+
+  /* Per-subsection helpers */
+  .logo-display-card {
+    background:
+      radial-gradient(ellipse 70% 90% at 50% 100%, rgba(46,2,121,0.04) 0%, transparent 70%),
+      linear-gradient(180deg, #fff 0%, var(--tod-off-white) 100%);
+    border: 1px solid rgba(1,14,33,.08);
+    border-radius: 18px;
+    padding: 64px 56px;
+    display: grid; place-items: center;
+    position: relative;
+    min-height: 440px;
+    overflow: hidden;
+  }
+  .logo-display-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(60deg, transparent 0 80px, rgba(1,14,33,.012) 80px 81px);
+    pointer-events: none;
+  }
+  .logo-display-card > * { position: relative; z-index: 1; }
+  .logo-display-card .pin {
+    position: absolute; top: 20px; left: 20px;
+    padding: 7px 16px; border-radius: 999px;
+    background: rgba(1,14,33,.06);
+    font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--tod-navy); font-weight: 600;
+    z-index: 2;
+  }
+  .logo-display-card.dark {
+    background: radial-gradient(ellipse 70% 90% at 50% 100%, rgba(255,199,44,0.08) 0%, transparent 70%), var(--tod-navy);
+    border-color: rgba(255,255,255,.08);
+  }
+  .logo-display-card.dark::before { background: repeating-linear-gradient(60deg, transparent 0 80px, rgba(255,255,255,.025) 80px 81px); }
+  .logo-display-card.dark .pin { background: rgba(255,255,255,.08); color: var(--tod-off-white); }
+
+  .logo-display-card.purple {
+    background:
+      radial-gradient(ellipse 70% 90% at 50% 100%, rgba(255,199,44,0.06) 0%, transparent 70%),
+      linear-gradient(180deg, var(--tod-deep-purple) 0%, #1a0540 100%);
+    border-color: rgba(255,255,255,.06);
+  }
+  .logo-display-card.purple::before { background: repeating-linear-gradient(60deg, transparent 0 80px, rgba(255,255,255,.025) 80px 81px); }
+  .logo-display-card.purple .pin { background: rgba(255,255,255,.1); color: var(--tod-off-white); }
+
+  /* Generic in-card logo styling — bigger by default */
+  .logo-display-card img,
+  .logo-display-card > .tod-logo {
+    width: min(78%, 480px) !important;
+    max-width: 100%;
+  }
+
+  /* Structural diagram contrast (dark navy logo on off-white bg) */
+  .logo-diagram img,
+  .endorsed-lockup .frame img {
+    filter: grayscale(1) brightness(0.32) opacity(0.95) !important;
+  }
+  .editorial .logo-diagram { background: linear-gradient(180deg, #fff 0%, rgba(1,14,33,0.025) 100%); min-height: 380px; }
+
+  /* Scale-size rows */
+  .scale-row {
+    display: grid; grid-template-columns: 200px 1fr 280px;
+    align-items: center; gap: 24px;
+    padding: 22px 0; border-bottom: 1px solid rgba(1,14,33,.06);
+  }
+  .scale-row:last-child { border-bottom: none; }
+  .scale-row .meta { font-size: 14px; }
+  .scale-row .meta strong { font-weight: 700; display: block; color: var(--tod-navy); }
+  .scale-row .meta small { font-size: 12px; color: var(--tod-mid-grey); }
+  .scale-row .demo { padding: 16px 24px; background: rgba(1,14,33,0.04); border-radius: 8px; position: relative; }
+  .scale-row .demo .arrow-h { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 2px; background: #FF66C4; }
+  .scale-row .demo .arrow-h::before, .scale-row .demo .arrow-h::after { content: ''; position: absolute; left: -3px; width: 8px; height: 2px; background: #FF66C4; }
+  .scale-row .demo .arrow-h::before { top: 0; } .scale-row .demo .arrow-h::after { bottom: 0; }
+  .scale-row .specs { display: flex; gap: 16px; font-size: 12px; color: var(--tod-mid-grey); }
+  .scale-row .specs strong { color: var(--tod-navy); font-weight: 600; }
+
+  /* Misuse / correct usage grid */
+  .usage-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; margin-bottom: 28px; }
+  @media (max-width: 700px) { .usage-rules { grid-template-columns: 1fr; } }
+  .usage-rule {
+    font-size: 13px; padding: 10px 0;
+    display: grid; grid-template-columns: 22px 1fr; gap: 10px;
+    align-items: start;
+  }
+  .usage-rule .marker { width: 18px; height: 18px; border-radius: 4px; display: grid; place-items: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .usage-rule .marker.x { background: var(--ui-error); color: white; }
+  .usage-rule .marker.ok { background: var(--ui-success); color: white; }
+  .usage-rule strong { display: block; font-weight: 700; margin-bottom: 4px; color: var(--tod-navy); }
+  .usage-rule p { font-size: 12.5px; opacity: 0.78; margin: 0; }
+
+  .usage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .usage-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .usage-grid { grid-template-columns: 1fr; } }
+  .usage-tile {
+    aspect-ratio: 16 / 11;
+    border-radius: 12px;
+    border: 1px solid rgba(1,14,33,0.08);
+    background: #fff;
+    padding: 18px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .usage-tile .num-badge {
+    position: absolute; top: 12px; left: 12px;
+    font-size: 10px; letter-spacing: .14em; color: var(--tod-mid-grey); font-weight: 600;
+  }
+  .usage-tile .tag {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 11px; padding: 4px 10px;
+    border-radius: 999px;
+    color: var(--tod-navy); font-weight: 600;
+  }
+  .usage-tile .tag.x { background: rgba(239,68,68,.1); color: var(--ui-error); }
+  .usage-tile .tag.ok { background: rgba(34,197,94,.12); color: var(--ui-success); }
+  .usage-tile .logo-area { flex: 1; display: grid; place-items: center; padding: 18px; }
+
+  /* Grid system mockup */
+  .grid-mockup-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 900px) { .grid-mockup-row { grid-template-columns: 1fr 1fr; } }
+  .grid-mockup {
+    aspect-ratio: 3 / 4;
+    border: 2px solid #4286F4;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 calc(11.11% - 2px), rgba(66, 134, 244, 0.16) calc(11.11% - 2px) 11.11%);
+    padding: 18px;
+    position: relative;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .grid-mockup .gm-label {
+    position: absolute; top: -22px; left: 0;
+    font-size: 10.5px; color: var(--tod-mid-grey); letter-spacing: .04em;
+  }
+  .grid-mockup img { width: 28%; }
+  .grid-mockup.top img { align-self: flex-start; }
+
+  /* Endorsed lockup display */
+  .endorsed-lockup {
+    background:
+      radial-gradient(ellipse 70% 90% at 50% 100%, rgba(46,2,121,0.05) 0%, transparent 70%),
+      linear-gradient(180deg, #fff 0%, var(--tod-off-white) 100%);
+    border-radius: 18px;
+    padding: 72px 64px;
+    position: relative;
+    border: 1px solid rgba(1,14,33,0.08);
+    min-height: 460px;
+    display: grid; place-items: center;
+    overflow: hidden;
+  }
+  .endorsed-lockup::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(60deg, transparent 0 80px, rgba(1,14,33,.012) 80px 81px);
+    pointer-events: none;
+  }
+  .endorsed-lockup > * { position: relative; z-index: 1; }
+  .endorsed-lockup .frame {
+    border: 1.5px dashed #FF66C4;
+    padding: 40px;
+    position: relative;
+    width: 88%;
+    max-width: 700px;
+  }
+  .endorsed-lockup .frame img { width: 100%; }
+  .endorsed-lockup .endorse-mark {
+    position: absolute; top: 12px; left: 12px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(1,14,33,0.06);
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tod-navy); font-weight: 600;
+  }
+  .endorsed-lockup .x-mark { font-size: 11px; color: var(--tod-mid-grey); position: absolute; }
+  .endorsed-lockup .tl { top: 6px; left: 6px; }
+  .endorsed-lockup .tr { top: 6px; right: 6px; }
+  .endorsed-lockup .bl { bottom: 6px; left: 6px; }
+  .endorsed-lockup .br { bottom: 6px; right: 6px; }
+
+  /* ============================================================= */
+  /* ===== LOGO SYSTEM v2 — SPACIOUS HERO SHEETS ================= */
+  /* Reference-matched: one hero idea per page, vast negative space, */
+  /* faint diagonal stripes, marker-font annotation labels.         */
+  /* ============================================================= */
+  .lx {
+    min-height: calc(100vh - var(--bar-h));
+    padding: clamp(32px, 3.5vw, 56px) clamp(40px, 6vw, 120px) clamp(48px, 6vw, 96px);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    scroll-margin-top: var(--bar-h);
+    border-bottom: 1px solid rgba(1,14,33,0.05);
+  }
+  /* Light page — faint diagonal stripes */
+  .lx.light {
+    color: var(--tod-navy);
+    background:
+      repeating-linear-gradient(122deg, transparent 0 44px, rgba(1,14,33,0.020) 44px 45px),
+      linear-gradient(165deg, #FAFBFD 0%, #EEF2F7 100%);
+  }
+  /* Dark page */
+  .lx.dark {
+    color: var(--tod-off-white);
+    background:
+      repeating-linear-gradient(122deg, transparent 0 44px, rgba(255,255,255,0.028) 44px 45px),
+      linear-gradient(155deg, #02122e 0%, #01091A 100%);
+    border-bottom-color: rgba(255,255,255,0.06);
+  }
+
+  /* Header row (matches reference masthead) */
+  .lx-head {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 24px;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: currentColor; opacity: .55;
+    position: relative; z-index: 2;
+  }
+  .lx-head .l { text-align: left; font-variant-numeric: tabular-nums; }
+  .lx-head .c { text-align: center; font-weight: 700; opacity: 1; }
+  .lx-head .c .sep { opacity: .4; margin: 0 9px; font-weight: 400; }
+  .lx-head .r { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Hero stage — the logo breathes at large scale */
+  .lx-hero {
+    flex: 1; position: relative; z-index: 2;
+    display: grid; place-items: center;
+    padding: clamp(24px, 5vh, 80px) 0;
+  }
+  .lx-hero img, .lx-hero .tod-logo {
+    width: clamp(260px, 40vw, 600px);
+    filter: drop-shadow(0 24px 60px rgba(1,14,33,0.10));
+  }
+  .lx.dark .lx-hero img, .lx.dark .lx-hero .tod-logo { filter: drop-shadow(0 30px 70px rgba(0,0,0,0.45)); }
+
+  /* Brand-color page: a large rounded yellow card fills the page */
+  .lx-card {
+    flex: 1; position: relative; z-index: 2;
+    margin-top: clamp(16px, 2vw, 28px);
+    border-radius: clamp(24px, 3vw, 48px);
+    background: var(--tod-yellow);
+    display: grid; place-items: center;
+    padding: clamp(40px, 6vw, 96px);
+    overflow: hidden;
+  }
+  .lx-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(122deg, transparent 0 50px, rgba(1,14,33,0.03) 50px 51px);
+    pointer-events: none;
+  }
+  .lx-card img { position: relative; z-index: 1; width: clamp(240px, 36vw, 540px); }
+  .lx-card .lx-annot { position: absolute; left: clamp(28px,4vw,64px); bottom: clamp(28px,4vw,56px); z-index: 2; }
+
+  /* Marker-font annotation block (bottom-left, like reference) */
+  .lx-annot { position: relative; z-index: 2; max-width: 42ch; }
+  .lx-annot .mk {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(26px, 2.4vw, 38px); font-weight: 700;
+    line-height: 1.05; letter-spacing: .01em;
+    color: var(--tod-navy);
+    display: block; margin-bottom: 12px;
+  }
+  .lx.dark .lx-annot .mk { color: var(--tod-yellow); }
+  .lx-card .lx-annot .mk { color: var(--tod-navy); }
+  .lx-annot .cap {
+    font-size: 13.5px; line-height: 1.6; max-width: 38ch;
+    color: currentColor; opacity: .62;
+  }
+  .lx.dark .lx-annot .cap { opacity: .7; }
+  .lx-card .lx-annot .cap { color: var(--tod-navy); opacity: .72; }
+  .lx-annot .words {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;
+  }
+  .lx-annot .words span {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
+    padding: 6px 12px; border-radius: 999px;
+    border: 1px solid currentColor; opacity: .5;
+  }
+
+  /* Spec sheet: title rail + large diagram (structure, clear space, scale) */
+  .lx-spec { flex: 1; position: relative; z-index: 2; display: grid; grid-template-columns: 340px 1fr; gap: clamp(40px, 5vw, 88px); align-items: center; padding-top: clamp(28px, 4vh, 56px); }
+  @media (max-width: 900px) { .lx-spec { grid-template-columns: 1fr; gap: 32px; } }
+  .lx-spec .rail { align-self: start; padding-top: clamp(20px, 4vh, 56px); }
+  .lx-spec .rail .num { font-family:'Caveat',cursive; font-size: 30px; font-weight: 700; color: var(--tod-yellow); line-height: 1; }
+  .lx-spec .rail h3 {
+    font-family: 'Alexandria', sans-serif; font-weight: 800; text-transform: uppercase;
+    font-size: clamp(28px, 2.6vw, 40px); line-height: 1.04; letter-spacing: -.025em;
+    margin: 14px 0 0; color: var(--tod-navy); overflow-wrap: anywhere;
+  }
+  .lx-spec .rail .u { width: 52px; height: 3px; background: var(--tod-yellow); margin: 22px 0 28px; }
+  .lx-spec .rail p { font-size: 14px; line-height: 1.62; color: var(--tod-navy); opacity: .82; max-width: 40ch; }
+  .lx-spec .rail p strong { display: block; font-weight: 700; opacity: 1; margin-bottom: 5px; }
+  .lx-spec .rail p + p { margin-top: 16px; }
+  .lx-spec .stage { display: grid; place-items: center; padding: clamp(20px,3vw,48px); }
+
+  /* Content sheet (matrix, endorsement, app, usage): header + big title + open body */
+  .lx-body { flex: 1; position: relative; z-index: 2; padding-top: clamp(28px, 4vh, 52px); }
+  .lx-body .hd { display: flex; align-items: baseline; gap: 18px; margin-bottom: 8px; }
+  .lx-body .hd .num { font-family:'Caveat',cursive; font-size: 30px; font-weight: 700; color: var(--tod-yellow); }
+  .lx-body .hd h3 { font-family:'Alexandria',sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(26px, 2.4vw, 38px); letter-spacing: -.02em; color: var(--tod-navy); margin: 0; }
+  .lx-body .u { width: 52px; height: 3px; background: var(--tod-yellow); margin: 6px 0 24px; }
+  .lx-body .lede { font-size: clamp(16px,1.4vw,21px); line-height: 1.5; color: var(--tod-navy); max-width: 70ch; margin: 0 0 28px; opacity: .9; }
+
+  /* ===================== EXPRESSION · ICON / MOTION / SONIC ===================== */
+  .icon-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .icon-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 560px) { .icon-grid { grid-template-columns: repeat(3, 1fr); } }
+  .icon-tile {
+    aspect-ratio: 1; border-radius: 14px;
+    border: 1px solid rgba(1,14,33,.08); background: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    transition: transform .25s var(--ease), border-color .25s var(--ease);
+  }
+  .icon-tile:hover { transform: translateY(-3px); border-color: rgba(255,199,44,.5); }
+  .icon-tile svg { width: 34px; height: 34px; color: var(--tod-navy); }
+  .icon-tile .lbl { font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--tod-mid-grey); font-weight: 600; }
+  .icon-tile.dark { background: var(--tod-navy); border-color: rgba(255,255,255,.08); }
+  .icon-tile.dark svg { color: var(--tod-yellow); }
+  .icon-tile.dark .lbl { color: rgba(244,246,250,.6); }
+
+  /* Icon construction grid */
+  .icon-build {
+    background:
+      linear-gradient(rgba(255,102,196,0.22) 1px, transparent 1px) 0 0 / 100% 12.5%,
+      linear-gradient(90deg, rgba(255,102,196,0.22) 1px, transparent 1px) 0 0 / 12.5% 100%,
+      #fff;
+    border: 1px solid rgba(1,14,33,.1);
+    border-radius: 12px; padding: 36px; display: grid; place-items: center;
+    position: relative; min-height: 280px;
+  }
+  .icon-build svg { width: 70%; max-width: 200px; color: var(--tod-navy); }
+
+  /* Motion timing rows */
+  .motion-row {
+    display: grid; grid-template-columns: 180px 1fr 140px; gap: 20px; align-items: center;
+    padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .light .motion-row { border-color: rgba(1,14,33,.08); }
+  .motion-row .ev { font-size: 14px; font-weight: 600; }
+  .motion-row .track { height: 8px; border-radius: 999px; background: rgba(255,255,255,.08); position: relative; overflow: hidden; }
+  .light .motion-row .track { background: rgba(1,14,33,.06); }
+  .motion-row .track .bar { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: linear-gradient(90deg, var(--tod-yellow), var(--tod-yellow-dim)); animation: mslide 2.6s var(--ease) infinite; }
+  @keyframes mslide { 0% { width: 0; opacity: .4; } 60% { width: var(--w, 50%); opacity: 1; } 100% { width: var(--w, 50%); opacity: .4; } }
+  .motion-row .dur { text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; color: var(--tod-yellow); font-weight: 600; }
+
+  /* Easing curve cards */
+  .ease-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 700px) { .ease-grid { grid-template-columns: 1fr; } }
+  .ease-card { border-radius: 14px; padding: 22px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); }
+  .ease-card svg { width: 100%; height: 80px; }
+  .ease-card .nm { font-size: 13px; font-weight: 700; margin-top: 12px; }
+  .ease-card .use { font-size: 12px; opacity: .65; margin-top: 4px; }
+
+  /* Logo reveal demo */
+  .reveal-stage {
+    border-radius: 18px; min-height: 300px; display: grid; place-items: center;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(255,199,44,.12), transparent 60%), var(--tod-navy);
+    overflow: hidden; cursor: pointer;
+  }
+  .reveal-stage img { width: 46%; max-width: 320px; animation: logoReveal 3.8s var(--ease) infinite; }
+  @keyframes logoReveal {
+    0% { opacity: 0; transform: scale(.82) translateY(14px); filter: blur(8px); }
+    18% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    82% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.04); }
+  }
+
+  /* Sonic waveform */
+  .waveform { display: flex; align-items: center; gap: 4px; height: 120px; padding: 0 4px; }
+  .waveform span { flex: 1; background: linear-gradient(180deg, var(--tod-yellow), var(--tod-yellow-dim)); border-radius: 999px; animation: wave 1.4s ease-in-out infinite; }
+  @keyframes wave { 0%, 100% { height: 12%; } 50% { height: 100%; } }
+
+  /* ===================== WCAG CONTRAST ===================== */
+  .wcag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .wcag-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .wcag-grid { grid-template-columns: 1fr; } }
+  .wcag-card { border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); }
+  .wcag-sample { padding: 24px 22px; min-height: 96px; display: flex; flex-direction: column; justify-content: center; }
+  .wcag-sample .big { font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+  .wcag-sample .sm { font-size: 12px; margin-top: 5px; opacity: .9; }
+  .wcag-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 11px 16px; background: rgba(255,255,255,.04);
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .light .wcag-meta { background: #fff; border-color: rgba(1,14,33,.07); }
+  .wcag-meta .ratio { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 14px; color: var(--tod-off-white); }
+  .light .wcag-meta .ratio { color: var(--tod-navy); }
+  .wcag-meta .pair { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--tod-mid-grey); }
+  .badge {
+    font-size: 9.5px; padding: 4px 10px; border-radius: 999px;
+    letter-spacing: .1em; font-weight: 700; text-transform: uppercase; white-space: nowrap;
+  }
+  .badge.aaa  { background: rgba(34,197,94,.18); color: #4ade80; border: 1px solid rgba(34,197,94,.4); }
+  .badge.aa   { background: rgba(132,204,22,.18); color: #a3e635; border: 1px solid rgba(132,204,22,.4); }
+  .badge.large{ background: rgba(245,158,11,.18); color: #fbbf24; border: 1px solid rgba(245,158,11,.4); }
+  .badge.fail { background: rgba(239,68,68,.18); color: #f87171; border: 1px solid rgba(239,68,68,.4); }
+
+  /* Caption demo over video */
+  .caption-demo {
+    position: relative; border-radius: 16px; overflow: hidden;
+    min-height: 300px; display: flex; align-items: flex-end;
+    padding: 32px; background-size: cover; background-position: center;
+  }
+  .caption-demo .cap-line {
+    display: inline-block; padding: 7px 14px; border-radius: 4px;
+    font-size: clamp(15px, 1.6vw, 20px); font-weight: 600; line-height: 1.5;
+  }
+  .caption-demo .cap-white { background: rgba(1,14,33,.82); color: #fff; }
+  .caption-demo .cap-yellow { background: rgba(1,14,33,.82); color: var(--tod-yellow); }
+
+  /* ===================== COLOR SPEC CARDS ===================== */
+  .cspec-grid { display: grid; gap: 18px; }
+  .cspec-grid.c2 { grid-template-columns: 1fr 1fr; }
+  .cspec-grid.c3 { grid-template-columns: repeat(3, 1fr); }
+  .cspec-grid.c4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 920px) { .cspec-grid.c2, .cspec-grid.c3, .cspec-grid.c4 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .cspec-grid { grid-template-columns: 1fr !important; } }
+
+  .cspec {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.03);
+    display: flex; flex-direction: column;
+  }
+  .light .cspec { border-color: rgba(1,14,33,.08); background: #fff; }
+  .cspec .fill {
+    min-height: 132px; padding: 20px 22px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .cspec .fill .role { font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; opacity: .72; font-weight: 600; }
+  .cspec .fill .nm { font-size: 19px; font-weight: 700; letter-spacing: -.01em; margin-top: auto; }
+  .cspec .vals { padding: 14px 22px 18px; }
+  .cspec .vrow {
+    display: grid; grid-template-columns: 84px 1fr; gap: 12px; align-items: baseline;
+    padding: 7px 0; border-top: 1px solid rgba(255,255,255,.07);
+  }
+  .light .cspec .vrow { border-color: rgba(1,14,33,.07); }
+  .cspec .vrow:first-child { border-top: none; padding-top: 2px; }
+  .cspec .vrow .k { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--tod-mid-grey); font-weight: 600; }
+  .cspec .vrow .v { font-size: 12.5px; font-variant-numeric: tabular-nums; font-weight: 500; color: var(--tod-off-white); }
+  .light .cspec .vrow .v { color: var(--tod-navy); }
+  .cspec .vrow .v.pms { color: var(--tod-yellow); }
+  .light .cspec .vrow .v.pms { color: var(--tod-deep-purple); }
+
+  /* ===================== LOGO SYSTEM — WORKSTATION SHEETS ===================== */
+  /* Each subsection is a full-page "document sheet": white paper, fine dot grid,
+     header row (number · TOD | Brand Guidelines · section · page), title with
+     yellow underline, content filling the page. */
+  .ls-sheet {
+    min-height: calc(100vh - var(--bar-h));
+    padding: clamp(36px, 4.5vw, 72px) clamp(28px, 5vw, 96px);
+    background:
+      radial-gradient(rgba(1, 14, 33, 0.10) 1px, transparent 1.3px) 0 0 / 20px 20px,
+      linear-gradient(180deg, #FCFDFE 0%, #F6F8FB 100%);
+    color: var(--tod-navy);
+    display: flex; flex-direction: column;
+    position: relative;
+    border-bottom: 1px solid rgba(1, 14, 33, 0.06);
+    scroll-margin-top: var(--bar-h);
+  }
+  .ls-inner {
+    max-width: 1440px; margin: 0 auto; width: 100%;
+    flex: 1; display: flex; flex-direction: column;
+  }
+
+  /* Header row: number · brand · section/page · hairline */
+  .ls-head {
+    display: grid; grid-template-columns: 64px 1fr auto;
+    align-items: baseline; gap: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(1, 14, 33, 0.14);
+  }
+  .ls-head .num {
+    font-size: 20px; font-weight: 600; color: var(--tod-mid-grey);
+    font-variant-numeric: tabular-nums; letter-spacing: .04em;
+  }
+  .ls-head .brand {
+    text-align: center; font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--tod-navy); font-weight: 700;
+  }
+  .ls-head .brand .sep { opacity: .35; margin: 0 10px; font-weight: 400; }
+  .ls-head .page {
+    text-align: right; font-size: 11px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--tod-mid-grey);
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 700px) { .ls-head .brand { display: none; } }
+
+  /* Content area fills the rest of the page */
+  .ls-content {
+    flex: 1;
+    display: grid; grid-template-columns: 340px 1fr;
+    gap: clamp(36px, 4vw, 72px);
+    align-items: start;
+    padding-top: clamp(32px, 5vh, 64px);
+  }
+  .ls-content.solo { grid-template-columns: 1fr; }
+  @media (max-width: 900px) { .ls-content { grid-template-columns: 1fr; gap: 36px; } }
+
+  .ls-rail { display: flex; flex-direction: column; min-width: 0; }
+  .ls-title {
+    font-family: 'Alexandria', sans-serif;
+    font-size: clamp(28px, 2.6vw, 40px); font-weight: 800;
+    line-height: 1.04; letter-spacing: -.025em;
+    color: var(--tod-navy); text-transform: uppercase;
+    overflow-wrap: anywhere; hyphens: none;
+  }
+  .ls-underline { width: 52px; height: 3px; background: var(--tod-yellow); margin: 22px 0 30px; }
+  .ls-body { font-size: 14px; line-height: 1.62; color: var(--tod-navy); opacity: .82; max-width: 42ch; }
+  .ls-body strong { font-weight: 700; opacity: 1; color: var(--tod-navy); }
+  .ls-body strong:first-child { display: block; margin-bottom: 5px; }
+  .ls-body + .ls-body { margin-top: 16px; }
+  .ls-rail-foot {
+    margin-top: auto; padding-top: 24px;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tod-mid-grey);
+  }
+
+  .ls-main { display: flex; flex-direction: column; min-width: 0; }
+  .ls-lede {
+    font-size: clamp(17px, 1.5vw, 23px); line-height: 1.45;
+    color: var(--tod-navy); margin: 0 0 28px; max-width: 62ch; font-weight: 400;
+  }
+  .ls-lede strong { font-weight: 600; }
+  /* Transparent stage — the dot-grid paper shows through behind the logo */
+  .ls-stage {
+    flex: 1; display: grid; place-items: center;
+    background: transparent;
+    border: 1px dashed rgba(1, 14, 33, 0.14);
+    border-radius: 18px;
+    padding: clamp(40px, 5vw, 72px);
+    position: relative; overflow: hidden;
+    min-height: 340px;
+  }
+  /* Dark stage keeps a solid navy fill (logo needs the contrast) */
+  .ls-stage.dark {
+    background:
+      radial-gradient(ellipse 70% 90% at 50% 100%, rgba(255,199,44,.10) 0%, transparent 70%),
+      linear-gradient(180deg, #02112a 0%, var(--tod-navy) 100%);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .ls-stage .pin {
+    position: absolute; top: 18px; left: 18px;
+    padding: 7px 15px; border-radius: 999px;
+    background: rgba(1,14,33,.06);
+    font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--tod-navy); font-weight: 600;
+  }
+  .ls-stage.dark .pin { background: rgba(255,255,255,.1); color: var(--tod-off-white); }
+  .ls-stage.dark .pin.yellow { background: rgba(255,199,44,.16); border: 1px solid rgba(255,199,44,.35); color: var(--tod-yellow); }
+
+  /* Inside Logo System sheets: make spec boxes transparent so dots show through */
+  .ls-sheet .logo-diagram { background: transparent !important; border: 1px dashed rgba(1,14,33,0.14); }
+  .ls-sheet .min-size-card { background: rgba(255,255,255,0.45) !important; }
+  .ls-sheet .logo-tight {
+    background:
+      linear-gradient(rgba(255, 102, 196, 0.30) 1px, transparent 1px) 0 0 / 100% 14.285%,
+      linear-gradient(90deg, rgba(255, 102, 196, 0.30) 1px, transparent 1px) 0 0 / 14.285% 100%;
+  }
+
+  /* ===================== EDITORIAL (PDF-style logo pages) ===================== */
+  .editorial {
+    display: grid; grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    background: var(--tod-off-white);
+    color: var(--tod-navy);
+    border-radius: 22px;
+    padding: 64px 72px;
+    margin-top: 24px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .editorial { grid-template-columns: 1fr; gap: 40px; padding: 40px 32px; }
+  }
+  .editorial .ed-number {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(1,14,33,0.1);
+    color: var(--tod-yellow);
+    font-size: 14px; font-weight: 600; letter-spacing: .04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .editorial .ed-number::after {
+    content: ''; flex: 1; height: 1px;
+    background: rgba(1,14,33,0.06);
+  }
+  .editorial .ed-left .ed-title {
+    font-size: clamp(28px, 3.6vw, 48px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--tod-navy);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .editorial .ed-left .ed-underline {
+    width: 48px; height: 3px;
+    background: var(--tod-yellow);
+    margin-bottom: 36px;
+  }
+  .editorial .ed-left .ed-body {
+    font-size: 14.5px;
+    color: var(--tod-navy);
+    opacity: 0.78;
+    line-height: 1.6;
+    max-width: 36ch;
+  }
+  .editorial .ed-left .ed-body + .ed-body { margin-top: 18px; }
+  .editorial .ed-left .ed-body strong {
+    display: block; font-weight: 700; opacity: 1;
+    color: var(--tod-navy); margin-bottom: 6px;
+  }
+  .editorial .ed-right .ed-lede {
+    font-size: clamp(18px, 1.4vw, 22px);
+    color: var(--tod-navy);
+    line-height: 1.5;
+    max-width: 56ch;
+    margin-bottom: 36px;
+  }
+  .editorial .ed-right .ed-lede strong { color: var(--tod-navy); font-weight: 600; }
+
+  /* Logo diagrams inside editorial */
+  .logo-diagram {
+    position: relative;
+    background: rgba(1,14,33,0.04);
+    border-radius: 12px;
+    padding: 56px;
+    min-height: 320px;
+    display: grid;
+    place-items: center;
+  }
+  .logo-diagram .grid-lines {
+    position: absolute; inset: 32px;
+    background-image:
+      linear-gradient(rgba(255, 102, 196, 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 102, 196, 0.3) 1px, transparent 1px);
+    background-size: 12.5% 25%;
+    pointer-events: none;
+  }
+  .logo-diagram .x-mark {
+    position: absolute;
+    font-size: 12px;
+    color: var(--tod-mid-grey);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .logo-diagram .x-mark.tl { top: 16px; left: 16px; }
+  .logo-diagram .x-mark.tr { top: 16px; right: 16px; }
+  .logo-diagram .x-mark.bl { bottom: 16px; left: 16px; }
+  .logo-diagram .x-mark.br { bottom: 16px; right: 16px; }
+  .logo-diagram .x-mark.t { top: 16px; left: 50%; transform: translateX(-50%); }
+  .logo-diagram .x-mark.b { bottom: 16px; left: 50%; transform: translateX(-50%); }
+  .logo-diagram .x-mark.l { left: 16px; top: 50%; transform: translateY(-50%); }
+  .logo-diagram .x-mark.r { right: 16px; top: 50%; transform: translateY(-50%); }
+  .logo-diagram .x-mark.bm { bottom: 12px; left: 50%; transform: translateX(-50%); }
+  .logo-diagram .logo-mark {
+    position: relative; z-index: 2;
+    color: rgba(1,14,33,0.4);
+    width: 70%;
+  }
+  .logo-diagram .clear-box {
+    position: absolute; inset: 56px;
+    border: 1.5px dashed rgba(1,14,33,0.18);
+    background-image: repeating-linear-gradient(45deg, rgba(1,14,33,0.025) 0 8px, transparent 8px 16px);
+  }
+  .logo-diagram .clear-corner {
+    position: absolute; width: 26px; height: 26px;
+    border: 1.5px solid rgba(1,14,33,0.25);
+    border-radius: 50%;
+  }
+  .logo-diagram .clear-corner.tl { top: 44px; left: 44px; }
+  .logo-diagram .clear-corner.tr { top: 44px; right: 44px; }
+  .logo-diagram .clear-corner.bl { bottom: 44px; left: 44px; }
+  .logo-diagram .clear-corner.br { bottom: 44px; right: 44px; }
+
+  /* Minimum size grid */
+  .min-sizes {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    margin-top: 24px;
+  }
+  @media (max-width: 700px) { .min-sizes { grid-template-columns: 1fr; } }
+  .min-size-card {
+    background: rgba(1,14,33,0.03);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .min-size-card .label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--tod-mid-grey); font-weight: 600; margin-bottom: 10px;
+  }
+  .min-size-card .demo {
+    background: rgba(1,14,33,0.05);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
+    color: rgba(1,14,33,0.45);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .min-size-card .demo .x { font-size: 12px; color: var(--tod-mid-grey); margin-left: auto; }
+  .min-size-card .demo .arrow {
+    position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+    width: 2px; height: 70%; background: #FF66C4;
+  }
+  .min-size-card .demo .arrow::before,
+  .min-size-card .demo .arrow::after {
+    content: ''; position: absolute; left: -3px;
+    width: 8px; height: 2px; background: #FF66C4;
+  }
+  .min-size-card .demo .arrow::before { top: 0; }
+  .min-size-card .demo .arrow::after { bottom: 0; }
+  .min-size-card h5 { font-size: 14px; font-weight: 700; margin: 0 0 6px; color: var(--tod-navy); }
+  .min-size-card p { font-size: 12.5px; opacity: 0.7; margin: 0 0 12px; max-width: 100%; }
+  .min-size-card .specs {
+    display: flex; justify-content: space-between;
+    font-size: 11.5px; color: var(--tod-mid-grey);
+    border-top: 1px solid rgba(1,14,33,0.08);
+    padding-top: 10px;
+  }
+  .min-size-card .specs strong { color: var(--tod-navy); font-weight: 600; }
+
+  /* ARCHETYPE */
+  .archetype { display: grid; grid-template-columns: 60px 1.4fr 1.6fr 1.6fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,.08); align-items: start; }
+  .light .archetype { border-color: rgba(1,14,33,.08); }
+  .archetype .n { font-size: 28px; font-weight: 800; color: var(--tod-yellow); line-height: 1; }
+  .archetype .name { font-size: 18px; font-weight: 700; letter-spacing: -.005em; }
+  .archetype .motiv { font-size: 14px; opacity: .76; }
+  .archetype .anchor { font-size: 13px; color: var(--tod-yellow); }
+  @media (max-width: 800px) { .archetype { grid-template-columns: 60px 1fr; } .archetype .motiv, .archetype .anchor { grid-column: 2; } }
+
+  /* CO-BRAND LOCKUP */
+  .lockup { background: var(--tod-navy); border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); }
+  .lockup .zone-80 { padding: 32px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 4px solid var(--tod-yellow); background: linear-gradient(135deg, rgba(46,2,121,.4), rgba(1,14,33,.95)); min-height: 320px; }
+  .lockup .zone-20 { padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; background: var(--tod-deep-navy); min-height: 80px; }
+  .lockup .zone-label { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  /* HAPPY SPECTRUM */
+  .happy-block { border-radius: 20px; overflow: hidden; background: var(--happy-grad-stripes); min-height: 280px; padding: 36px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
+  .happy-block .tag { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; background: rgba(0,0,0,.25); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; align-self: flex-start; }
+  .happy-strip { display: grid; grid-template-columns: repeat(4, 1fr); border-radius: 14px; overflow: hidden; margin-top: 32px; }
+  .happy-strip > div { padding: 28px 22px; min-height: 140px; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
+  .happy-strip .name { font-size: 12.5px; font-weight: 700; letter-spacing: .04em; }
+  .happy-strip .hex { font-size: 11px; opacity: .78; margin-top: 4px; font-variant-numeric: tabular-nums; }
+
+  /* UI SEMANTIC */
+  .ui-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 700px) { .ui-row { grid-template-columns: 1fr; } }
+  .ui-card { padding: 26px; border-radius: 16px; display: flex; gap: 20px; align-items: center; border: 1px solid rgba(1,14,33,.08); background: #fff; }
+  .ui-card .dot { width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0; }
+  .ui-card .name { font-size: 14px; font-weight: 700; }
+  .ui-card .hex { font-size: 12px; font-variant-numeric: tabular-nums; opacity: .7; margin-top: 4px; }
+  .ui-card .usage { font-size: 12.5px; opacity: .7; margin-top: 4px; }
+
+  /* CALLOUT */
+  .callout { padding: 24px 28px; border-radius: 14px; background: rgba(255,199,44,.08); border-left: 3px solid var(--tod-yellow); margin-top: 32px; }
+  .callout .label { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--tod-yellow); margin-bottom: 8px; font-weight: 600; }
+  .callout p { font-size: 14px; margin: 0; opacity: .9; }
+  .callout.flag { background: rgba(239,68,68,.08); border-color: var(--ui-error); }
+  .callout.flag .label { color: var(--ui-error); }
+  .callout.locked { background: rgba(34,197,94,.08); border-color: var(--ui-success); }
+  .callout.locked .label { color: var(--ui-success); }
+
+  /* INLINE IMAGE (PDF-style wide banner inside a section) */
+  .inline-image {
+    margin: 56px 0; border-radius: 18px; overflow: hidden;
+    position: relative; aspect-ratio: 21 / 9;
+    background-size: cover; background-position: center;
+    background-color: var(--tod-deep-navy);
+  }
+  .inline-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(1,14,33,.65) 100%);
+    pointer-events: none;
+  }
+  .inline-image .caption {
+    position: absolute; bottom: 22px; left: 32px; right: 32px;
+    z-index: 1; display: flex; justify-content: space-between; align-items: end;
+    gap: 16px; flex-wrap: wrap; color: #fff;
+  }
+  .inline-image .caption .lbl { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; opacity: .8; }
+  .inline-image .caption .ttl { font-size: clamp(20px, 2.5vw, 32px); font-weight: 700; letter-spacing: -.01em; max-width: 30ch; }
+  .inline-image .caption .tag {
+    padding: 8px 14px; border-radius: 999px;
+    background: rgba(255,199,44,.18); border: 1px solid rgba(255,199,44,.35);
+    color: var(--tod-yellow); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  }
+  @media (max-width: 700px) {
+    .inline-image { aspect-ratio: 4/3; }
+  }
+
+  /* FULL-BLEED PHOTO STRIP */
+  .photo-strip {
+    position: relative; padding: 0; min-height: 50vh;
+    overflow: hidden; display: grid; place-items: center;
+    color: var(--tod-off-white); background: var(--tod-navy);
+  }
+  .photo-strip .bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: brightness(.55);
+  }
+  .photo-strip .content {
+    position: relative; z-index: 1;
+    text-align: center; padding: var(--pad-y) var(--pad-x);
+    max-width: 900px;
+  }
+  .photo-strip h2 { font-size: clamp(40px, 8vw, 96px); }
+  .photo-strip .quote-label { font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--tod-yellow); margin-bottom: 24px; }
+
+  /* FOOTER */
+  footer { background: var(--tod-deep-navy); color: var(--tod-off-white); padding: 72px var(--pad-x) 56px; border-top: 1px solid rgba(255,255,255,.04); }
+  footer .inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
+  @media (max-width: 760px) { footer .inner { grid-template-columns: 1fr; } }
+  footer h4 { font-size: 10px; opacity: .55; color: var(--tod-off-white); margin-bottom: 18px; letter-spacing: .22em; }
+  footer a { display: block; font-size: 13.5px; color: rgba(244,246,250,.7); padding: 5px 0; transition: color .25s var(--ease); }
+  footer a:hover { color: var(--tod-yellow); }
+  footer .colophon { font-size: 11.5px; color: rgba(244,246,250,.4); margin-top: 8px; line-height: 1.7; }
+  footer .colophon strong { color: var(--tod-yellow); }
+  footer .footer-logo { color: var(--tod-off-white); margin-bottom: 20px; }
+  footer .footer-logo .tod-logo { --logo-w: 110px; }
+
+  /* SCROLL HINT */
+  .scroll-hint { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: rgba(244,246,250,.4); display: flex; align-items: center; gap: 12px; margin-top: 40px; }
+  .scroll-hint::after { content: ''; width: 32px; height: 1px; background: rgba(244,246,250,.3); }
+
+  /* PRINT */
+  @media print {
+    .topbar, .drawer, .drawer-backdrop { display: none; }
+    body { padding-top: 0; }
+    section { page-break-inside: avoid; padding: 48px 32px; }
+  }
+</style>
+</head>
+<body>
+<!-- ===================== INLINE LOGO SPRITE ===================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="todLogoGrad1" x1="173.83" y1="27.48" x2="439.94" y2="91.8" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFC72C"/>
+      <stop offset="1" stop-color="#202020" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="todLogoGrad2" x1="467.5" y1="-1" x2="467.5" y2="249.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#202020"/>
+      <stop offset="1" stop-opacity="0"/>
+    </linearGradient>
+    <symbol id="tod-by-bein" viewBox="0 0 778 477">
+      <path d="M160 320H96V64H0V30C0 13.43 13.43 0 30 0H385V64H160V320Z" fill="#FFC72C"/>
+      <path d="M0 30C0 13.43 13.43 0 30 0H385V64H0V30Z" fill="url(#todLogoGrad1)"/>
+      <path d="M618 0C706.37 0 778 71.63 778 160C778 248.37 706.37 320 618 320H562V305C562 277.39 584.39 255 612 255H618C618.17 255 618.33 255 618.5 255C671.24 255 714 212.24 714 159.5C714 106.76 671.24 64 618.5 64C618.33 64 618.17 64 618 64H512.01C532.1 90.74 544 123.98 544 160C544 248.37 472.37 320 384 320C295.63 320 224 248.37 224 160C224 71.63 295.63 0 384 0C384.33 0 384.67 0 385 0H618ZM384.5 64C331.76 64 289 106.76 289 159.5C289 212.24 331.76 255 384.5 255C437.24 255 480 212.24 480 159.5C480 106.76 437.24 64 384.5 64Z" fill="#FFC72C"/>
+      <mask id="tod-mask"><path d="M384 0C472.37 0 544 71.63 544 160C544 248.37 472.37 320 384 320C295.63 320 224 248.37 224 160C224 71.63 295.63 0 384 0ZM384.5 64C331.76 64 289 106.76 289 159.5C289 212.24 331.76 255 384.5 255C437.24 255 480 212.24 480 159.5C480 106.76 437.24 64 384.5 64Z" fill="white"/></mask>
+      <g mask="url(#tod-mask)"><path d="M550 64H385V320H550V64Z" fill="url(#todLogoGrad2)"/></g>
+      <path d="M332.922 393.82C314.212 393.82 303.362 405.08 299.222 410.5V369.92C299.222 367.76 297.452 366 295.272 366C293.092 366 291.322 367.76 291.322 369.92V436.39C291.322 455.71 307.232 476.55 332.932 476.55C358.632 476.55 374.542 455.01 374.542 434.9C374.542 409.52 352.942 393.81 332.912 393.81L332.922 393.82ZM332.812 468.3C314.362 468.3 299.352 453.33 299.352 434.92C299.352 416.51 314.362 401.54 332.812 401.54C351.262 401.54 366.282 416.51 366.282 434.92C366.282 453.33 351.282 468.3 332.812 468.3ZM462.832 435.19C462.832 437.17 461.562 439.17 458.712 439.17H415.312C413.052 439.17 411.212 437.34 411.212 435.1C411.212 432.86 413.042 431.03 415.292 431.03H454.392C452.312 414.38 438.212 401.95 421.132 401.95C402.642 401.95 387.582 416.87 387.582 435.21C387.582 453.55 402.632 468.47 421.132 468.47C432.902 468.47 443.612 462.51 449.772 452.53C450.392 451.6 451.322 450.98 452.392 450.77C453.472 450.56 454.552 450.77 455.452 451.38C457.312 452.62 457.842 455.12 456.612 456.96C448.942 469.24 435.682 476.58 421.132 476.58C398.132 476.58 379.422 458.02 379.422 435.21C379.422 412.4 398.132 393.85 421.132 393.85C444.132 393.85 462.832 412.4 462.832 435.21V435.19ZM486.142 469.86V469.89C485.912 473.03 482.572 476.53 478.162 476.55H478.122C473.672 476.53 470.392 473.1 470.132 469.89V400.72C470.392 397.44 473.672 394.01 478.122 393.99H478.162C482.572 394.02 485.912 397.51 486.142 400.65V469.85V469.86ZM592.092 474.33C588.172 475.91 584.522 476.56 581.212 476.56C570.242 476.56 562.822 469.52 560.452 465.95C557.492 461.47 529.472 417.6 528.292 415.65C528.212 415.51 525.172 409.27 519.172 409.61C508.782 410.53 509.292 419.14 509.322 419.5V469.31C509.322 473.22 505.732 476.53 501.472 476.55H501.442C496.822 476.53 493.682 473.24 493.422 470.19V418.14C493.422 417.97 493.792 402 509.162 395.73C524.842 389.94 536.782 398.64 540.992 405.9L573.062 455.98C573.252 456.29 577.732 463.48 586.482 459.36C590.662 457.39 591.602 452.94 591.602 451.54V400.55C591.852 397.34 595.162 393.86 599.512 393.84H599.542C603.952 393.85 607.182 397.27 607.452 400.45V451.49C607.452 451.6 608.232 467.8 592.082 474.32L592.092 474.33Z" fill="currentColor"/>
+      <path d="M237.032 465.3C233.942 464.43 231.302 462.83 229.222 460.49C228.262 459.41 227.372 458.19 226.802 456.89C225.862 454.76 226.882 452.43 228.842 451.47C230.812 450.5 233.232 451.21 234.422 453.2C235.362 454.77 236.512 456.03 238.252 456.78C242.382 458.56 248.362 458.06 251.862 455.09C253.832 453.42 255.152 451.32 255.832 448.86C256.312 447.13 256.552 445.42 256.552 443.62V439.6C250.282 448.09 237.922 447.74 230.702 440.63C229.222 439.17 227.952 437.61 227.002 435.75C225.492 432.8 224.632 429.61 224.622 426.25L224.592 402.11C224.592 399.63 226.762 397.85 229.182 398.12C231.142 398.34 232.712 399.93 232.722 401.97L232.782 426.14C232.782 428.36 233.492 430.43 234.562 432.25C236.732 435.92 240.542 437.9 244.782 437.87C249.362 437.84 253.462 435.35 255.322 431.12C256.062 429.44 256.532 427.65 256.542 425.74L256.592 401.97C256.592 399.72 258.492 398.11 260.672 398.09C262.712 398.07 264.732 399.63 264.732 401.85L264.752 444.11C264.752 449.73 263.042 455.27 259.262 459.42C253.662 465.58 245.102 467.54 237.062 465.28L237.032 465.3Z" fill="currentColor"/>
+      <path d="M218.422 423.2C218.122 429.24 215.802 434.96 211.882 439.4C206.192 445.85 197.462 448.67 189.072 446.8C184.432 445.77 180.252 443.44 177.062 439.92C172.782 435.19 170.542 429.71 170.542 423.23L170.562 382.66C170.562 380.73 172.682 379.45 174.302 379.53C176.132 379.63 177.752 381.12 177.752 383.05L177.772 404.73C182.112 400.28 187.132 397.7 193.182 397.21C202.602 396.55 211.562 401.61 215.812 410.03C217.862 414.09 218.652 418.52 218.412 423.21L218.422 423.2ZM200.962 438.37C205.502 436.3 208.712 432.49 210.192 427.81C211.472 423.77 211.422 419.68 210.032 415.68C208.152 410.29 203.772 406.2 198.162 404.91C193.202 403.77 188.072 405.14 184.202 408.43C176.542 414.96 175.532 426.57 182.102 434.18C186.782 439.6 194.382 441.37 200.962 438.36V438.37Z" fill="currentColor"/>
+    </symbol>
+
+    <!-- Mono / white variant — sourced from 01_Logos/SVG/ُTODbybeIN-05.svg
+         Wide horizontal layout (TOD on left, "by beIN" on right) with
+         built-in shade: gradient on T-top + gradient overlay on O right.
+         The wordmark itself uses currentColor (set to white on dark/yellow,
+         navy on light) — gradients stay hard-coded so the shade is preserved. -->
+    <linearGradient id="todMonoGrad1" x1="540.75" y1="-5725.49" x2="806.86" y2="-5789.8" gradientTransform="translate(0 -5358) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#202020"/>
+    </linearGradient>
+    <linearGradient id="todMonoGrad2" x1="834.42" y1="-5697" x2="834.42" y2="-5947.5" gradientTransform="translate(0 -5358) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#202020"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="todMonoMask" x="590.92" y="340" width="326" height="320" maskUnits="userSpaceOnUse">
+      <path fill="#ffbc00" d="M750.92,340c88.37,0,160,71.63,160,160s-71.63,160-160,160-160-71.63-160-160,71.63-160,160-160ZM751.42,404c-52.74,0-95.5,42.76-95.5,95.5s42.76,95.5,95.5,95.5,95.5-42.76,95.5-95.5-42.76-95.5-95.5-95.5Z"/>
+    </mask>
+    <symbol id="tod-by-bein-mono" viewBox="0 0 2000 1000">
+      <!-- T letterform -->
+      <path fill="currentColor" d="M526.92,660h-64v-256h-96v-34c0-16.57,13.43-30,30-30h355v64h-225v256Z"/>
+      <!-- T top gradient (shade) -->
+      <path fill="url(#todMonoGrad1)" d="M366.92,370c0-16.57,13.43-30,30-30h355v64h-385v-34Z"/>
+      <!-- OD combined shape -->
+      <path fill="currentColor" d="M984.92,340c88.37,0,160,71.63,160,160s-71.63,160-160,160h-56v-15c0-27.61,22.39-50,50-50h6c.17,0,.33,0,.5,0,52.74,0,95.5-42.76,95.5-95.5s-42.76-95.5-95.5-95.5c-.17,0-.33,0-.5,0h0s-105.99,0-105.99,0c20.09,26.74,31.99,59.98,31.99,96,0,88.37-71.63,160-160,160s-160-71.63-160-160,71.63-160,160-160c.33,0,.67,0,1,0h0s233,0,233,0ZM751.42,404c-52.74,0-95.5,42.76-95.5,95.5s42.76,95.5,95.5,95.5,95.5-42.76,95.5-95.5-42.76-95.5-95.5-95.5Z"/>
+      <!-- O right-side shade overlay -->
+      <g mask="url(#todMonoMask)"><rect fill="url(#todMonoGrad2)" x="751.92" y="404" width="165" height="256"/></g>
+      <!-- "b" of "by" -->
+      <path fill="currentColor" d="M1343.73,369.32c-19.72,0-31.15,11.87-35.51,17.58v-42.77c0-2.28-1.87-4.14-4.16-4.14s-4.16,1.86-4.16,4.14v70.06c0,20.36,16.77,42.33,43.86,42.33s43.86-22.7,43.86-43.9c0-26.75-22.76-43.3-43.87-43.3ZM1343.61,447.81c-19.45,0-35.27-15.78-35.27-35.18s15.82-35.18,35.27-35.18,35.27,15.78,35.27,35.18-15.81,35.18-35.27,35.18ZM1480.63,412.92c0,2.08-1.33,4.19-4.34,4.19h-45.74c-2.38,0-4.32-1.93-4.32-4.29s1.93-4.29,4.3-4.29h41.21c-2.19-17.55-17.05-30.65-35.05-30.65-19.49,0-35.35,15.72-35.35,35.05s15.86,35.05,35.35,35.05c12.4,0,23.69-6.28,30.18-16.8.66-.98,1.64-1.63,2.76-1.85,1.14-.22,2.28,0,3.23.64,1.96,1.3,2.52,3.94,1.23,5.88-8.08,12.95-22.06,20.68-37.39,20.68-24.24,0-43.96-19.56-43.96-43.6s19.72-43.58,43.96-43.58,43.94,19.55,43.94,43.58ZM1505.2,449.46v.04c-.24,3.31-3.76,7-8.41,7.02h-.04c-4.69-.02-8.14-3.64-8.42-7.02v-72.89c.28-3.46,3.73-7.07,8.42-7.09h.04c4.65.03,8.17,3.71,8.41,7.02v72.93ZM1616.86,454.17c-4.13,1.67-7.98,2.35-11.46,2.35-11.56,0-19.38-7.42-21.87-11.18-3.12-4.72-32.65-50.96-33.9-53.01-.08-.15-3.29-6.72-9.61-6.36-10.95.97-10.41,10.04-10.38,10.43v52.49c0,4.12-3.79,7.6-8.27,7.63h-.04c-4.87-.02-8.18-3.49-8.45-6.7v-54.85c0-.18.39-17.01,16.59-23.61,16.52-6.1,29.1,3.07,33.55,10.71l33.8,52.78c.2.33,4.93,7.91,14.15,3.56,4.4-2.08,5.4-6.76,5.4-8.25v-53.73c.27-3.38,3.75-7.05,8.33-7.07h.03c4.65.01,8.06,3.61,8.33,6.96v53.79c0,.12.83,17.19-16.2,24.06Z"/>
+      <!-- "y" -->
+      <path fill="currentColor" d="M1242.67,444.65c-3.26-.91-6.04-2.6-8.23-5.07-1.02-1.14-1.95-2.43-2.55-3.8-.99-2.24.08-4.7,2.15-5.72,2.08-1.02,4.62-.27,5.88,1.83.99,1.66,2.2,2.99,4.03,3.78,4.35,1.88,10.66,1.35,14.34-1.78,2.07-1.76,3.47-3.98,4.18-6.57.5-1.82.76-3.63.76-5.52v-4.23c-6.61,8.95-19.63,8.57-27.25,1.08-1.56-1.53-2.89-3.18-3.9-5.15-1.59-3.11-2.5-6.47-2.5-10.01l-.03-25.45c0-2.61,2.29-4.49,4.84-4.2,2.06.23,3.72,1.9,3.73,4.06l.06,25.48c0,2.34.75,4.52,1.88,6.44,2.29,3.87,6.3,5.96,10.77,5.93,4.83-.03,9.14-2.65,11.11-7.11.78-1.77,1.28-3.66,1.28-5.67l.05-25.05c0-2.37,2.01-4.07,4.3-4.09,2.15-.02,4.28,1.62,4.28,3.97l.02,44.54c0,5.93-1.8,11.76-5.78,16.14-5.91,6.49-14.92,8.56-23.4,6.18Z"/>
+      <!-- "b" of "beIN" -->
+      <path fill="currentColor" d="M1223.05,400.29c-.32,6.37-2.77,12.39-6.89,17.07-6,6.8-15.19,9.77-24.03,7.8-4.89-1.09-9.3-3.54-12.66-7.25-4.51-4.98-6.87-10.76-6.87-17.59l.02-42.76c0-2.03,2.23-3.38,3.94-3.29,1.93.1,3.64,1.67,3.64,3.7l.02,22.85c4.57-4.69,9.87-7.41,16.25-7.93,9.93-.7,19.37,4.63,23.85,13.51,2.16,4.28,2.99,8.95,2.74,13.89ZM1204.65,416.27c4.79-2.18,8.17-6.19,9.73-11.13,1.35-4.25,1.3-8.57-.17-12.78-1.98-5.68-6.59-9.99-12.51-11.35-5.23-1.2-10.64.24-14.71,3.71-8.07,6.88-9.14,19.11-2.21,27.14,4.93,5.71,12.95,7.57,19.88,4.41Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===================== TOP BAR ===================== -->
+<header class="topbar">
+  <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <a href="Brand_Book_Master.html" class="topbar-logo"><span class="tod-logo"><svg><use href="#tod-by-bein"/></svg></span></a>
+  <div class="topbar-title"><strong>Book 03</strong> · Voice &amp; Language · v2.0</div>
+  <div class="topbar-right"><span class="dot"></span> No. 1 Sports &amp; Stories</div>
+</header>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<nav class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <a href="Brand_Book_Master.html" class="tod-logo"><svg><use href="#tod-by-bein"/></svg></a>
+    <button class="close-x" id="closeBtn" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="nav-section">Brand System · 12 Books</div>
+  <a class="nav-item" href="Brand_Book_Master.html"><span class="num">01</span> Brand Book</a>
+  <a class="nav-item" href="Book02_Logo_System.html"><span class="num">02</span> Logo System</a>
+  <a class="nav-item" href="#cover" data-close style="color: var(--tod-yellow);"><span class="num">03</span> Voice &amp; Language</a>
+  <a class="nav-item" href="Book04_Design_System.html"><span class="num">04</span> Design System</a>
+  <a class="nav-item" href="Book07_Sonic_Motion.html"><span class="num">05</span> Sonic &amp; Motion</a>
+  <a class="nav-item" href="Book_TOD_Studios.html"><span class="num">06</span> TOD Studios</a>
+  <a class="nav-item" href="Book05_CoBrand_Playbook.html"><span class="num">07</span> Co-Brand Playbook</a>
+  <a class="nav-item" href="Book06_Social_Live.html"><span class="num">08</span> Social &amp; Live</a>
+  <a class="nav-item" href="Book08_Broadcast_OnAir.html"><span class="num">09</span> Broadcast &amp; On-Air</a>
+  <a class="nav-item" href="Book11_TOD360_Features.html"><span class="num">10</span> Product · TOD360</a>
+  <a class="nav-item" href="Book10_PR_Media_Kit.html"><span class="num">11</span> PR &amp; Media Kit</a>
+  <a class="nav-item" href="Book09_Brand_Operations.html"><span class="num">12</span> Brand Operations</a>
+  <div class="nav-section">This Book</div>
+  <a class="nav-item" href="#v-voice" data-close><span class="num">3.1</span> Voice</a>
+  <a class="nav-item" href="#v-tone" data-close><span class="num">3.2</span> Tone Spectrum</a>
+  <a class="nav-item" href="#v-pillars" data-close><span class="num">3.3</span> Pillars</a>
+  <a class="nav-item" href="#v-principles" data-close><span class="num">3.4</span> Writing Principles</a>
+  <a class="nav-item" href="#v-mechanics" data-close><span class="num">3.5</span> House Style</a>
+  <a class="nav-item" href="#v-lexicon" data-close><span class="num">3.6</span> Lexicon</a>
+  <a class="nav-item" href="#v-channels" data-close><span class="num">3.7</span> Voice by Channel</a>
+  <a class="nav-item" href="#v-boiler" data-close><span class="num">3.8</span> Boilerplate</a>
+  <a class="nav-item" href="#v-langs" data-close><span class="num">3.9</span> Languages</a>
+  <a class="nav-item" href="#v-registers" data-close><span class="num">3.10</span> Arabic Registers</a>
+  <a class="nav-item" href="#v-rtl" data-close><span class="num">3.11</span> Bilingual Mechanics</a>
+  <a class="nav-item" href="#v-ux" data-close><span class="num">3.12</span> UX Writing</a>
+  <a class="nav-item" href="#v-ai" data-close><span class="num">3.13</span> AI Voice</a>
+  <a class="nav-item" href="#v-naming" data-close><span class="num">3.14</span> Naming</a>
+  <a class="nav-item" href="#v-sensitive" data-close><span class="num">3.15</span> Sensitive Moments</a>
+  <a class="nav-item" href="#v-live" data-close><span class="num">3.16</span> Live &amp; Match-Day</a>
+  <div class="sig-line"><div class="label">Master Signature</div><div class="line">No. 1 Sports &amp; Stories</div></div>
+  <p class="nav-meta"><strong>LOCKED v2.0</strong><br>Single point of entry: <strong>brand@tod.tv</strong></p>
+</nav>
+
+<main>
+
+  <section id="cover" class="cover">
+    <div class="bg-photo" style="background-image: linear-gradient(180deg, rgba(1,14,33,.35), rgba(1,14,33,.78)), url('./images/photos/generated/b03_hero.jpg');"></div>
+    <div class="bg-grad"></div>
+    <div class="pad">
+      <span class="pill yellow-pill">Book 03 · Verbal Identity</span>
+      <div class="cover-logo" aria-label="TOD by beIN"><span class="tod-logo"><svg><use href="#tod-by-bein"/></svg></span></div>
+      <h1 style="font-size: clamp(40px,7vw,96px); font-weight:800; letter-spacing:-.02em; margin:18px 0 0; line-height:1;">Voice &amp; Language.</h1>
+      <p class="sub">How TOD by beIN sounds — in headlines, support replies, press statements, and the app. One voice, five tones, four pillars, four co-equal languages. Written to be said aloud.</p>
+      <div class="signature"><div class="label">Master Signature</div><div class="line">No. 1 Sports &amp; Stories</div></div>
+      <div class="meta"><div class="meta-tags"><span>Voice</span><span>Tone</span><span>Mechanics</span><span>Lexicon</span><span>Multilingual</span></div><div>From beIN Media Group · brand@tod.tv</div></div>
+      <div class="scroll-hint">Scroll to begin</div>
+    </div>
+  </section>
+
+
+  <!-- 3.1 VOICE -->
+  <section id="v-voice" class="light">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.1 · Voice</div>
+      <h3>One voice. <span class="accent-purple">Five tones.</span> Four pillars.</h3>
+      <p style="margin-top:18px; max-width:64ch;">Voice is constant — it never changes. Tone flexes with the moment. Below is the voice: three traits that hold across every word we publish.</p>
+      <h3 style="margin:40px 0 24px;">Clear  ·  Confident  ·  <span class="accent-purple">Human.</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Pillar</th><th>Definition</th><th>Test</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Clear</strong></td><td>Say one thing. Say it once. Then stop. We never bury the point under decoration.</td><td>If the headline needs a sub-line to explain it, the headline is wrong.</td></tr>
+          <tr><td><strong>Confident</strong></td><td>We know the sport. We know the story. We carry the rights. We do not ask permission to lead.</td><td>No hedging ("maybe," "we think," "it might be") in brand-level copy.</td></tr>
+          <tr><td><strong>Human</strong></td><td>Built by people who love what we serve. Warm where it matters. Never corporate. Never cold.</td><td>Read it aloud. If you would not say it to a friend over coffee, rewrite it.</td></tr>
+        </tbody>
+      </table>
+      <div class="inline-image" style="background-image: url('./images/photos/generated/b03_voice.jpg'); margin-top:40px;">
+        <div class="caption"><div><div class="lbl">Voice · Clear · Confident · Human</div><div class="ttl">Read it aloud. If you wouldn't say it to a friend over coffee, rewrite it.</div></div><span class="tag">Book 03</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.2 TONE SPECTRUM -->
+  <section id="v-tone" class="dark">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.2 · Tone Spectrum</div>
+      <h3>Five contextual tones. <span class="accent">One voice underneath.</span></h3>
+      <table class="data-table" style="margin-top:40px;">
+        <thead><tr><th>Tone</th><th>Used For</th><th>Sounds Like</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hype</strong></td><td>Live sport, finals, premiere moments, match-day social.</td><td>"It is happening. Now."</td></tr>
+          <tr><td><strong>Information</strong></td><td>Schedules, fixture lists, programme guides, navigation.</td><td>"Liverpool vs Real Madrid. Tonight, 22:00 KSA."</td></tr>
+          <tr><td><strong>Service</strong></td><td>Support, billing, error states, FAQ.</td><td>"Something went wrong. We are fixing it. You will not be charged."</td></tr>
+          <tr><td><strong>Premium</strong></td><td>Originals, prestige series, awards, master campaigns.</td><td>"A story told over six nights. Beginning Friday."</td></tr>
+          <tr><td><strong>Anchor</strong></td><td>Brand-level moments. Year-anchor campaigns. Master signature.</td><td>"No. 1 Sports &amp; Stories."</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3.3 PILLARS -->
+  <section id="v-pillars" class="light">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.3 · Messaging Pillars</div>
+      <h3>Four pillars. <span class="accent-purple">Every line ladders to one.</span></h3>
+      <div class="grid-4" style="grid-template-columns: repeat(2, 1fr); margin-top:40px;">
+        <div class="card"><span class="number">Pillar 01</span><h4>Premium Authority</h4><p style="margin-top:10px;">We carry the rights, the craft, and the curation the region's most discerning viewers expect. We do not chase volume. We invest in quality.</p></div>
+        <div class="card"><span class="number">Pillar 02</span><h4>Regional Truth</h4><p style="margin-top:10px;">Local fluency, market by market. The calendar, the languages, the partners — all native to where we ship, not translated.</p></div>
+        <div class="card"><span class="number">Pillar 03</span><h4>Frictionless Experience</h4><p style="margin-top:10px;">Three taps to play. Fast on every device. The product earns its premium label by removing what no streaming viewer should tolerate.</p></div>
+        <div class="card"><span class="number">Pillar 04</span><h4>Cultural Companion</h4><p style="margin-top:10px;">Match-day, Ramadan, Eid, new season. We do not just carry the moment — we mark it, frame it, and share it with the audience.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.4 WRITING PRINCIPLES (NEW) -->
+  <section id="v-principles" class="dark">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.4 · Writing Principles</div>
+      <h3>How we write. <span class="accent">Six rules, no exceptions.</span></h3>
+      <div class="grid-3" style="margin-top:40px;">
+        <div class="card"><span class="number">01</span><h4>Lead with the verb</h4><p style="margin-top:10px;">Start with the action, not the set-up. "Watch every match" beats "You can now watch every match."</p></div>
+        <div class="card"><span class="number">02</span><h4>Short over long</h4><p style="margin-top:10px;">Prefer the shorter word, the shorter sentence. Cut every word that earns nothing.</p></div>
+        <div class="card"><span class="number">03</span><h4>Active, not passive</h4><p style="margin-top:10px;">"We fixed it" — never "it has been fixed." Own the action.</p></div>
+        <div class="card"><span class="number">04</span><h4>One idea per line</h4><p style="margin-top:10px;">If a sentence holds two ideas, it is two sentences. Full stops are free.</p></div>
+        <div class="card"><span class="number">05</span><h4>No jargon, no hype-words</h4><p style="margin-top:10px;">No "ultimate," "revolutionary," "seamless," "world-class." Show it; never claim it.</p></div>
+        <div class="card"><span class="number">06</span><h4>Say it aloud</h4><p style="margin-top:10px;">If it does not sound like a person, rewrite. The ear is the final editor.</p></div>
+      </div>
+      <h4 style="color: var(--tod-yellow); margin:64px 0 20px;">Do / Don't</h4>
+      <div class="grid-2">
+        <div class="card" style="border-left:3px solid var(--ui-success);"><span class="number" style="color:var(--ui-success);">✓ Write this</span>
+          <p style="margin-top:10px;">"Liverpool vs Real Madrid. Tonight, 22:00 KSA. On TOD by beIN."</p>
+          <p style="margin-top:8px;">"Something went wrong. We're fixing it — you won't be charged."</p>
+          <p style="margin-top:8px;">"Six nights. One story. Starts Friday."</p>
+        </div>
+        <div class="card" style="border-left:3px solid var(--ui-danger,#EF4444);"><span class="number" style="color:#EF4444;">✕ Not this</span>
+          <p style="margin-top:10px;">"Don't miss the ultimate footballing showdown of the season!"</p>
+          <p style="margin-top:8px;">"We apologise for any inconvenience that may have been caused."</p>
+          <p style="margin-top:8px;">"Experience world-class storytelling like never before."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.5 HOUSE STYLE / MECHANICS (NEW) -->
+  <section id="v-mechanics" class="light">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.5 · House Style</div>
+      <h3>Mechanics. <span class="accent-purple">The small rules that keep us consistent.</span></h3>
+      <table class="data-table" style="margin-top:40px;">
+        <thead><tr><th>Item</th><th>Rule</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Brand name</strong></td><td>"TOD by beIN" in external copy. "TOD" alone only inside the app or internally.</td><td>TOD by beIN</td></tr>
+          <tr><td><strong>Time</strong></td><td>24-hour clock + market timezone code.</td><td>22:00 KSA · 21:00 UAE</td></tr>
+          <tr><td><strong>Dates</strong></td><td>Day Month, no ordinals in display copy.</td><td>14 March · not 14th March</td></tr>
+          <tr><td><strong>Scores</strong></td><td>Home first, en-dash, no spaces around it in running text.</td><td>Liverpool 2–1 Real Madrid</td></tr>
+          <tr><td><strong>Numbers</strong></td><td>Spell zero–nine; numerals for 10+. Always numerals for scores, prices, times.</td><td>three taps · 12 matches</td></tr>
+          <tr><td><strong>Capitalisation</strong></td><td>Sentence case for headlines and UI. Title case only for proper names.</td><td>Watch every match</td></tr>
+          <tr><td><strong>Ampersand</strong></td><td>Only in the locked signature and fixed names. Use "and" in body copy.</td><td>No. 1 Sports &amp; Stories</td></tr>
+          <tr><td><strong>Punctuation</strong></td><td>One space after full stops. No Oxford comma unless it removes ambiguity.</td><td>sport, films and series</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3.6 LEXICON (NEW) -->
+  <section id="v-lexicon" class="dark">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.6 · Lexicon</div>
+      <h3>Words we use. <span class="accent">Words we avoid.</span></h3>
+      <div class="grid-2" style="margin-top:40px;">
+        <div class="card" style="border-left:3px solid var(--ui-success);"><span class="number" style="color:var(--ui-success);">✓ Use</span>
+          <p style="margin-top:10px; line-height:2;">premium · destination · match · series · story · live · every screen · market by market · endorsed by beIN · without friction · on your terms</p>
+        </div>
+        <div class="card" style="border-left:3px solid #EF4444;"><span class="number" style="color:#EF4444;">✕ Avoid</span>
+          <p style="margin-top:10px; line-height:2;">content (as a noun for shows) · OTT · SVOD · binge · ultimate · revolutionary · seamless · cutting-edge · unleash · game-changer · best-in-class</p>
+        </div>
+      </div>
+      <div class="callout flag" style="margin-top:24px;"><div class="label">Naming rule</div><p>Never "TOD" alone in external comms, never "Tod" or "T.O.D.". The endorsement "by beIN" is structural — it travels with the name. See Book 02 for the visual lockup.</p></div>
+    </div>
+  </section>
+
+  <!-- 3.7 CHANNEL VOICE MATRIX (NEW) -->
+  <section id="v-channels" class="light">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.7 · Voice by Channel</div>
+      <h3>Same voice. <span class="accent-purple">Tuned per surface.</span></h3>
+      <table class="data-table" style="margin-top:40px;">
+        <thead><tr><th>Channel</th><th>Dominant Tone</th><th>Length</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Match-day social</strong></td><td>Hype</td><td>≤ 12 words</td><td>Present tense. Score-led. One emoji max.</td></tr>
+          <tr><td><strong>App / UI</strong></td><td>Information + Service</td><td>≤ 6 words / label</td><td>Verb-first. No marketing language in functional copy.</td></tr>
+          <tr><td><strong>Push notifications</strong></td><td>Information</td><td>≤ 10 words</td><td>The "why now" in the first three words.</td></tr>
+          <tr><td><strong>Originals / prestige</strong></td><td>Premium</td><td>1–2 lines</td><td>Restraint. Let the title breathe.</td></tr>
+          <tr><td><strong>Support / billing</strong></td><td>Service</td><td>As needed</td><td>Plain, calm, accountable. Name the fix.</td></tr>
+          <tr><td><strong>PR / corporate</strong></td><td>Premium + Anchor</td><td>Boilerplate</td><td>See 3.8. Endorsement always present.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3.8 BOILERPLATE -->
+  <section id="v-boiler" class="dark">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.8 · Boilerplate</div>
+      <h3>Approved descriptions. <span class="accent">Copy-ready.</span></h3>
+      <div class="grid-3" style="margin-top:40px;">
+        <div class="card"><span class="number">Short · PR · 25 words</span><p style="margin-top:10px;">TOD by beIN is a premium streaming destination — endorsed by beIN, growing market by market, and home to the sport, films, and series that matter.</p></div>
+        <div class="card"><span class="number">Medium · Web · 50 words</span><p style="margin-top:10px;">TOD by beIN is a premium streaming destination endorsed by beIN — a globally trusted sports broadcaster. TOD by beIN delivers live sport, prestige series, and TOD Studios originals on every screen, scaling market by market.</p></div>
+        <div class="card"><span class="number">Long · Corporate · 100 words</span><p style="margin-top:10px;">TOD by beIN is the streaming destination of beIN Media Group. Endorsed by beIN Sports — a globally trusted broadcaster — TOD by beIN combines premium live sport, prestige international series, TOD Studios originals, and international cinema on one platform, available across mobile, web, and connected TV. Multilingual by design, locally curated, and culturally fluent — market by market.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.9 LANGUAGE HIERARCHY -->
+  <section id="v-langs" class="light">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.9 · Languages</div>
+      <h3>Four languages. <span class="accent-purple">Each a co-equal primary</span> in the markets it natively serves.</h3>
+      <table class="data-table" style="margin-top:40px;">
+        <thead><tr><th>Language</th><th>Role</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Arabic</strong></td><td>Co-equal primary. Native to the heart of the markets we serve.</td><td><span class="pill locked">Locked</span></td></tr>
+          <tr><td><strong>English</strong></td><td>Co-equal primary. Native to a meaningful share of the audience.</td><td><span class="pill locked">Locked</span></td></tr>
+          <tr><td><strong>Turkish</strong></td><td>Co-equal primary. Native to our Türkiye market and its audience.</td><td><span class="pill locked">Locked</span></td></tr>
+          <tr><td><strong>French</strong></td><td>Co-equal primary. Native across France and the Francophone Maghreb — Morocco, Tunisia, Algeria.</td><td><span class="pill locked">Locked</span></td></tr>
+        </tbody>
+      </table>
+      <div class="callout locked" style="margin-top:24px;">
+        <div class="label">Governing principle</div>
+        <p>Each language above is a co-equal primary within the markets it natively serves — never a translation, never an afterthought of another. As TOD&rsquo;s footprint grows, new languages join the hierarchy at this same standard.</p>
+      </div>
+      <div class="inline-image" style="background-image: url('./images/photos/generated/b03_localization.jpg'); margin-top:40px;">
+        <div class="caption"><div><div class="lbl">Localization · built in parallel</div><div class="ttl">Arabic and English are co-equal. Never translated as an afterthought.</div></div><span class="tag">Book 03</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.10 ARABIC REGISTERS -->
+  <section id="v-registers" class="dark">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.10 · Arabic Registers</div>
+      <h3>Three approved registers. <span class="accent">Nothing else.</span></h3>
+      <p style="margin:18px 0 0; max-width:64ch;">TOD writes Arabic in Light (White) Arabic, Khaleeji, and Fus'ha — these are the brand voice. Mixing registers within a single piece is forbidden — pick one and commit.</p>
+      <div class="grid-3" style="margin-top:40px;">
+        <div class="card" style="border-left: 4px solid var(--tod-yellow);"><span class="number">Light · White Arabic</span><h4 style="font-size:32px;">لهجة بيضاء</h4><p style="margin-top:10px;">The default spoken voice — a neutral dialect with no heavy local markers, understood across the GCC and the wider Arab world. Marketing, social, hype lines, voice-over, trailers.</p></div>
+        <div class="card" style="border-left: 4px solid var(--tod-yellow);"><span class="number">GCC · Khaleeji</span><h4 style="font-size:32px;">خليجي</h4><p style="margin-top:10px;">Gulf-targeted campaigns and local sports culture. Match-day social in the Gulf — especially Qatar and Saudi. Saudi Pro League, Khaleeji creators, GCC national-day moments.</p></div>
+        <div class="card" style="border-left: 4px solid var(--tod-yellow);"><span class="number">Modern Standard · Fus'ha</span><h4 style="font-size:32px;">فصحى</h4><p style="margin-top:10px;">The formal and product layer. UI copy, service messages, billing, support, corporate and press. Formal headlines and pan-regional announcements.</p></div>
+      </div>
+      <div class="callout flag" style="margin-top:20px;">
+        <div class="label">Not brand voice</div>
+        <p>Heavy local dialects — Levantine (شامي), Egyptian (مصري), Maghrebi (دارجة) and the like — are <strong>not</strong> used as TOD's Arabic brand voice. Keep marketing and brand copy in White Arabic or Khaleeji, and the formal layer in Fus'ha. (Content/title metadata and licensed dubs follow the title's own language — that is separate from brand voice.)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.11 RTL + DO-NOT-TRANSLATE (NEW additions) -->
+  <section id="v-rtl" class="light">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.11 · Bilingual Mechanics</div>
+      <h3>RTL layout &amp; <span class="accent-purple">what never gets translated.</span></h3>
+      <h4 style="color: var(--tod-deep-purple); margin:40px 0 20px;">RTL Layout Rules</h4>
+      <div class="grid-4">
+        <div class="card"><h4>Lockup</h4><p>Master lockup flips from top-left to top-right.</p></div>
+        <div class="card"><h4>Primary CTA</h4><p>Aligns to the right edge of its container.</p></div>
+        <div class="card"><h4>Yellow Tag</h4><p>Match-day yellow tag moves from top-left to top-right.</p></div>
+        <div class="card"><h4>Numerics</h4><p>Scores, times, dates stay LTR within RTL. Spacing unchanged.</p></div>
+      </div>
+      <h4 style="color: var(--tod-deep-purple); margin:64px 0 20px;">Do Not Translate</h4>
+      <div class="callout"><div class="label">Locked in all languages</div><p><strong>TOD by beIN</strong> · <strong>by beIN</strong> · <strong>No. 1 Sports &amp; Stories</strong> · <strong>TOD Studios</strong> · product feature names · team and competition official names. The signature is rendered in Latin script even within Arabic layouts.</p></div>
+      <div class="callout flag" style="margin-top:16px;"><div class="label">Parallel build</div><p>Arabic is written natively, not translated from English. Brief both languages from the same idea — never run English through translation and ship the output.</p></div>
+    </div>
+  </section>
+
+  <!-- 3.12 UX WRITING (NEW) -->
+  <section id="v-ux" class="dark">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.12 · UX Writing</div>
+      <h3>The copy users <span class="accent">actually read.</span></h3>
+      <p style="margin:18px 0 0; max-width:64ch;">Buttons, errors, empty states, paywalls — microcopy is the product's voice at the moment of action. Clear beats clever every time.</p>
+      <div class="grid-2" style="margin-top:40px; gap:24px;">
+        <div class="card" style="background: rgba(34,197,94,.06); border-color: rgba(34,197,94,.18);">
+          <span class="number" style="color:var(--ui-success);">✓ Write</span>
+          <ul style="margin-top:12px; padding-left:18px; line-height:1.9; opacity:.85;">
+            <li><strong>Buttons:</strong> verb first — "Start watching", "Resume", "Upgrade".</li>
+            <li><strong>Errors:</strong> what happened + the fix — "Can't play offline. Reconnect to continue."</li>
+            <li><strong>Empty states:</strong> an invitation — "Nothing saved yet. Add your first title."</li>
+            <li><strong>Paywall:</strong> the value, not the wall — "Watch every match. Upgrade to Premium."</li>
+          </ul>
+        </div>
+        <div class="card" style="background: rgba(239,68,68,.06); border-color: rgba(239,68,68,.2);">
+          <span class="number" style="color:var(--ui-error);">✗ Avoid</span>
+          <ul style="margin-top:12px; padding-left:18px; line-height:1.9; opacity:.85;">
+            <li>"OK" / "Submit" / "Click here" — say what it does.</li>
+            <li>"Error 403: forbidden" — never raw codes to users.</li>
+            <li>"You have no items." — don't blame or dead-end the user.</li>
+            <li>"!" and "please" in system copy — it isn't asking a favour.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:24px;"><div class="label">House rules</div><p>Sentence case on every label and button. One primary action per screen. Numbers as numerals (4 matches, not four). Never a "loading…" with no end — say what's loading.</p></div>
+    </div>
+  </section>
+
+  <!-- 3.13 AI VOICE (NEW) -->
+  <section id="v-ai" class="light">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.13 · AI &amp; Conversational</div>
+      <h3>When TOD speaks <span class="accent-purple">without a human.</span></h3>
+      <p style="margin:18px 0 0; max-width:64ch;">Chatbots, help assistants, and automated replies carry the same voice — warm, clear, confident. With three extra rules.</p>
+      <div class="grid-3" style="margin-top:40px;">
+        <div class="card"><span class="number">01 · Be honest</span><h4 style="color:var(--tod-navy);">Never pretend to be human.</h4><p style="margin-top:10px;">The assistant is TOD's, not a person. No fake names, no "I feel". If asked, it says it's an automated assistant.</p></div>
+        <div class="card"><span class="number">02 · Be brief</span><h4 style="color:var(--tod-navy);">Answer, then stop.</h4><p style="margin-top:10px;">Lead with the answer. One step at a time. No walls of text, no corporate filler.</p></div>
+        <div class="card"><span class="number">03 · Hand off</span><h4 style="color:var(--tod-navy);">Know the limits.</h4><p style="margin-top:10px;">For billing disputes, outages, or anything sensitive, route to a human fast. Never guess at account or rights details.</p></div>
+      </div>
+      <div class="callout flag" style="margin-top:24px;"><div class="label">Never</div><p>No promises the product can't keep ("you'll get a refund"), no rights claims for competitions we don't carry, no medical, legal, or financial advice. When unsure, the assistant escalates — it does not improvise.</p></div>
+    </div>
+  </section>
+
+  <!-- 3.14 NAMING (NEW) -->
+  <section id="v-naming" class="dark">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.14 · Naming Conventions</div>
+      <h3>How we <span class="accent">name things.</span></h3>
+      <p style="margin:18px 0 0; max-width:64ch;">Consistent names keep the product legible across teams and both scripts.</p>
+      <table class="data-table" style="margin-top:40px;">
+        <thead><tr><th>What</th><th>Rule</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Originals</strong></td><td>Title Case for the show name. "TOD Studios original" is a descriptor, never part of the title.</td><td>A TOD Studios original</td></tr>
+          <tr><td><strong>Features</strong></td><td>Descriptive, capitalise only true product names. Keep them short.</td><td>Multiview · dual commentary · TOD Shorts</td></tr>
+          <tr><td><strong>Plans</strong></td><td>Short and value-led, capitalised as proper nouns.</td><td>Premium · Sports Pass · Annual</td></tr>
+          <tr><td><strong>Events</strong></td><td>Use the rights-holder's official name. Never invent a competition name.</td><td>UEFA Champions League on TOD</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:24px;"><div class="label">Both scripts</div><p>"TOD" stays Latin caps inside Arabic names. Descriptive feature names are written natively in each language — never transliterate them.</p></div>
+    </div>
+  </section>
+
+  <!-- 3.15 SENSITIVE & CRISIS (NEW) -->
+  <section id="v-sensitive" class="light">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.15 · Sensitive Moments</div>
+      <h3>When the moment is <span class="accent-purple">heavy.</span></h3>
+      <p style="margin:18px 0 0; max-width:64ch;">A hard loss, an injury, a national day of mourning, a sensitive cultural or religious moment. The voice slows down and the hype stops.</p>
+      <div class="grid-3" style="margin-top:40px;">
+        <div class="card"><span class="number">Drop the energy</span><h4 style="color:var(--tod-navy);">No hype, no emoji.</h4><p style="margin-top:10px;">Exclamation marks, banter, and promotional CTAs come off. Plain, respectful, factual.</p></div>
+        <div class="card"><span class="number">Be human</span><h4 style="color:var(--tod-navy);">Acknowledge, don't sell.</h4><p style="margin-top:10px;">During mourning or tragedy, lead with respect. No product push next to a condolence.</p></div>
+        <div class="card"><span class="number">Mind the calendar</span><h4 style="color:var(--tod-navy);">Ramadan &amp; observances.</h4><p style="margin-top:10px;">Adjust tone for Ramadan and religious days — warmer, family-first, never flippant.</p></div>
+      </div>
+      <div class="callout flag" style="margin-top:24px;"><div class="label">Mandatory · route it</div><p>Any crisis-adjacent or politically or religiously sensitive copy is cleared with Comms and <a href="mailto:brand@tod.tv" style="color:var(--ui-error); text-decoration:underline;">brand@tod.tv</a> before it goes out. When in doubt, pause the scheduled posts.</p></div>
+    </div>
+  </section>
+
+  <!-- 3.16 LIVE / MATCH-DAY (NEW) -->
+  <section id="v-live" class="dark">
+    <div class="inner">
+      <div class="chap-meta"><span class="line"></span> 3.16 · Live &amp; Match-Day</div>
+      <h3>The <span class="accent">loudest register.</span></h3>
+      <p style="margin:18px 0 0; max-width:64ch;">Score alerts, hooks, and match-day social run hot and fast — present tense, short, in the moment. The one place the brand is allowed to shout.</p>
+      <div class="grid-2" style="margin-top:40px; gap:24px;">
+        <div class="card" style="background: rgba(34,197,94,.06); border-color: rgba(34,197,94,.18);">
+          <span class="number" style="color:var(--ui-success);">✓ Say</span>
+          <ul style="margin-top:12px; padding-left:18px; line-height:1.9; opacity:.85;">
+            <li>Present tense, live: "GOAL. They've done it."</li>
+            <li>Short hooks: "Four matches. One screen."</li>
+            <li>Factual on scores, times, and names — always.</li>
+          </ul>
+        </div>
+        <div class="card" style="background: rgba(239,68,68,.06); border-color: rgba(239,68,68,.2);">
+          <span class="number" style="color:var(--ui-error);">✗ Don't</span>
+          <ul style="margin-top:12px; padding-left:18px; line-height:1.9; opacity:.85;">
+            <li>Spoil the result in a push title or notification.</li>
+            <li>Take sides between competing teams.</li>
+            <li>Carry the hype register into off-pitch or sensitive moments.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:24px;"><div class="label">Spoiler rule</div><p>Notifications and previews never reveal the result. "Full time at the Bernabéu" — not the score. Let the user choose to find out.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="inner">
+      <div>
+        <div class="footer-logo"><span class="tod-logo"><svg><use href="#tod-by-bein"/></svg></span></div>
+        <div style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; opacity: .55;">Brand System · v2.0 · 2026</div>
+        <p style="font-size: 13.5px; max-width: 36ch; opacity: .6; line-height: 1.7; margin-top: 16px;">Premium content. Without friction. On your terms.<br><br><strong style="color: var(--tod-yellow);">No. 1 Sports &amp; Stories.</strong></p>
+      </div>
+      <div>
+        <h4>Asset Library</h4>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgDcP9qv107mTbhXzmPfQxTtAUJobdGxlf1J26FqRITWFbM&amp;e=QdCluC" target="_blank" rel="noopener">Logos</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgCAT1lPB4TiT46UQPrJ5oasAaDqsHCZBWmFu37q-_SCSSE&amp;e=asvphO" target="_blank" rel="noopener">Colors</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgDrHgYF9KtdSqrs8jRHDMhkAbgB0J-YyG9S1VBRq3Gio0Y&amp;e=uYvhsL" target="_blank" rel="noopener">Fonts</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgD3vERizV4qT59FM1TCxQqcAdhVpvGTGrSkvUa3Rrslo-U&amp;e=8YyQCz" target="_blank" rel="noopener">Photography</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgDvPIPVB51aQrLcEkyYfS-gASgQQGSyoY6muCcOUD1Vz5I&amp;e=NgnMZl" target="_blank" rel="noopener">Motion</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgCZOa-MUBvyQr4JjgE3x0STAfSGw9TqWAJsOmFGHq8aOHU&amp;e=VaXhFw" target="_blank" rel="noopener">Icons</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgAO0ziFE69oTLAoDggcdzTjAbijkZOQVRoJGVhxmtGJ6y8&amp;e=Q1erJp" target="_blank" rel="noopener">UI / Digital</a>
+      </div>
+      <div>
+        <h4>Templates</h4>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgBDdQNwt7LmSZw27PqFAbdzAS8HxnRjOBKeWVm9QabHjXk&amp;e=glKL9A" target="_blank" rel="noopener">Stationery</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgCyVBxBSsUqRakYapxyi2-xAR6kx5urXfQiCOVuSvg1wFM&amp;e=uQX8y3" target="_blank" rel="noopener">Presentations</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgDfnFBkOnYtQosC9E-vsziyAVYtCYgQWXiow3gFgqy_b98&amp;e=9Wyx8w" target="_blank" rel="noopener">Marketing</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgBcXXylOuTGSI6IXCq7fE0EAavh7GEH40A2ZLyZZBpQ_eA&amp;e=znMc2T" target="_blank" rel="noopener">Events</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgCNr4QDUwV1R4W_YgaV4HmQARJmCuVxkWtnniGE1USweOE&amp;e=UugUnS" target="_blank" rel="noopener">Merchandise</a>
+        <a href="https://beinmg-my.sharepoint.com/personal/saymouaah_tod_tv/_layouts/15/guestaccess.aspx?share=IgDmDTP5czuJTb8yoLIluppqAf4I8I3bQOvYfZ-pfjcQ4nY&amp;e=kbN1qp" target="_blank" rel="noopener">Master PDF</a>
+        <a href="mailto:brand@tod.tv">brand@tod.tv</a>
+      </div>
+    </div>
+    <div class="inner" style="display:block; margin-top: 48px; border-top: 1px solid rgba(255,255,255,.06); padding-top: 24px;">
+      <p class="colophon">© 2026 <strong>TOD by beIN</strong>. From beIN Media Group. All rights reserved.<br>Brand System v2.0 · Locked Reference · Single point of entry: <strong>brand@tod.tv</strong></p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // Drawer logic
+  const burger = document.getElementById('burgerBtn');
+  const drawer = document.getElementById('drawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+  const closeBtn = document.getElementById('closeBtn');
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    drawer.setAttribute('aria-hidden', 'false');
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    drawer.setAttribute('aria-hidden', 'true');
+  }
+  burger.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+  // Close drawer on link click
+  drawer.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeDrawer));
+  drawer.querySelectorAll('.nav-item[href^="#"]').forEach(el => el.addEventListener('click', closeDrawer));
+
+  // Highlight current section in drawer nav
+  const navLinks = drawer.querySelectorAll('.nav-item[href^="#"]');
+  const sections = [...document.querySelectorAll('section[id]')];
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = drawer.querySelector(`.nav-item[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
